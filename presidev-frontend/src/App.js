@@ -1,11 +1,12 @@
-
+import {Routes, Route} from 'react-router-dom';
+import {default as Layout} from './layouts';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        Homepage
-      </header>
+      <Routes>
+        <Route path="/" element={<Layout />} />
+      </Routes>
     </div>
   );
 }
