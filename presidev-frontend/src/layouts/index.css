@@ -330,6 +330,10 @@
   .header .logo h1 span {
     color: #f96f59;
   }
+
+  header span {
+    color: #9CD5CB;
+  }
   
   .sticked-header-offset {
     margin-top: 70px;
@@ -1936,6 +1940,7 @@
     color: rgba(255, 255, 255, 0.6);
     font-weight: 400;
     margin-bottom: 30px;
+    font-family: 'Poppins', sans-serif;
   }
   
   .hero .btn-get-started {
