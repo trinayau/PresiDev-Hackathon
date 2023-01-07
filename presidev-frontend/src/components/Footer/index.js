@@ -61,7 +61,7 @@ const Footer = () => {
       </div>
       <div class="credits">
        
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Built by <a href="https://github.com/trinayau/PresiDev-Hackathon" target="_blank" rel="noreferrer">Team PresiDev</a>
       </div>
     </div>
 

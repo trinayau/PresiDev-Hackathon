@@ -18,14 +18,14 @@ const HomePage = () => {
         <div className="row gy-5" data-aos="fade-in">
         <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
           <h2>Welcome to <span>Presidium Platform</span></h2>
-          <p>Presidium Platform is a platform built for members of Presidium Network. Add common items to your order, or request custom products delivered directly to you. Get in touch to request an account and find out how Presidium Network can help you.</p>
+          <p>Presidium Platform is a platform built for members of the Presidium Network. Add common items to your order, or request custom products delivered directly to you. Get in touch to request an account and find out how Presidium Network can help you.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started">Get Started</a>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-telephone"></i><span>Contact Us</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
-          <img src="assets/img/hero-img.svg" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100"/>
+          <img src="assets/img/logistics.png" class="img-fluid" alt="globe with logistics" data-aos="zoom-out" data-aos-delay="100"/>
         </div>
       </div>
             </div>
