@@ -81,35 +81,35 @@ const HomePage = () => {
 
         <div class="section-header">
           <h2>About Us</h2>
-          <p>Presidium Platform is developed and maintained by Team PresiDev.</p>
+          <p>Presidium Platform is developed and maintained by Team PresiDev for the Presidium Network in crisis zones.</p>
         </div>
 
         <div class="row gy-4">
           <div class="col-lg-6">
-            <h3>Voluptatem dignissimos provident quasi corporis</h3>
-            <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt=""/>
-            <p>Ut fugiat ut sunt quia veniam. Voluptate perferendis perspiciatis quod nisi et. Placeat debitis quia recusandae odit et consequatur voluptatem. Dignissimos pariatur consectetur fugiat voluptas ea.</p>
-            <p>Temporibus nihil enim deserunt sed ea. Provident sit expedita aut cupiditate nihil vitae quo officia vel. Blanditiis eligendi possimus et in cum. Quidem eos ut sint rem veniam qui. Ut ut repellendus nobis tempore doloribus debitis explicabo similique sit. Accusantium sed ut omnis beatae neque deleniti repellendus.</p>
+            <h3>Presidium Platform and Presidium Network</h3>
+            <img src="https://images.unsplash.com/photo-1649621035719-1184ffc9b326?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="img-fluid rounded-4 mb-4" alt=""/>
+            <p>The Presidium Network is a UK non-profit that provides support to communities in crisis to manage humanitarian issues and represent the needs of people affected by violence or poverty to international-policy makers.</p>
+            <p>Our mission is to provide recommendation and coordination services to international stakeholders and advocacy for communities affected by conflict and widespread violence and/or violations of human rights to decelerate violence, and improve the respect for human rights.</p>
           </div>
           <div class="col-lg-6">
             <div class="content ps-0 ps-lg-5">
               <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
+                The Presidium Platform aims to help the Presidium Network with:
               </p>
               <ul>
-                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check-circle-fill"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check-circle-fill"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                <li><i class="bi bi-check-circle-fill"></i>
+                Maintaining transparency and accountability to our partners and stakeholders across the supply chain
+</li>
+                <li><i class="bi bi-check-circle-fill"></i>Enhancing communication between end users and operational members</li>
+                <li><i class="bi bi-check-circle-fill"></i> Making sure supplies and services are getting sent to the right people every time </li>
               </ul>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+                Find out more about the project and how you can help by watching our video:
               </p>
 
               <div class="position-relative mt-4">
-                <img src="assets/img/about-2.jpg" class="img-fluid rounded-4" alt=""/>
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
+                <img src="https://images.unsplash.com/photo-1635006304757-a02d75887177?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="img-fluid rounded-4" alt=""/>
+                <a href="https://vimeo.com/635308356?embedded=true&source=video_title&owner=154786827" class="glightbox play-btn"></a>
               </div>
             </div>
           </div>
