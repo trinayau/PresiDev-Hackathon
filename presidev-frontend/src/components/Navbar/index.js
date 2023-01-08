@@ -111,25 +111,25 @@ const Navbar = () => {
                <MenuItem key={'Products'} 
               onClick={() => handleLink('/products')}
                >
-                  <Typography textAlign="center">Study Rooms</Typography>
+                  <Typography textAlign="center">About</Typography>
                 </MenuItem>
                 <MenuItem key={'Suppliers'} 
               onClick={() => handleLink('/suppliers')}
               
                >
-                  <Typography textAlign="center">Suppliers</Typography>
+                  <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
                 <MenuItem key={'Restaurants'} 
                onClick={() => handleLink('/restaurants')}
              
                >
-                  <Typography textAlign="center">Restaurants</Typography>
+                  <Typography textAlign="center">Register</Typography>
                 </MenuItem>
                 <MenuItem key={'contact'} 
                onClick={() => handleLink('/contact')}
               
                >
-                  <Typography textAlign="center">Contact</Typography>
+                  <Typography textAlign="center">Login</Typography>
                 </MenuItem>
         
             </Menu>

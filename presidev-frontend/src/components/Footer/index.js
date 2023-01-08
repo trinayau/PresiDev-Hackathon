@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 const Footer = () => {
+
     return ( <footer id="footer" class="footer">
 
     <div class="container">
@@ -7,7 +10,7 @@ const Footer = () => {
           <a href="index.html" class="logo d-flex align-items-center">
             <span>Presidium Platform</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Presidium Platform for Presidium Network aims to serve volunteers and organisations in crisis zones around the world.</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -19,22 +22,21 @@ const Footer = () => {
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><HashLink to="/">Home</HashLink></li>
+            <li><HashLink to="/#about">About us</HashLink></li>
+            <li><HashLink to="/#contact">Contact</HashLink></li>
+            <li><Link to="/login">Login</Link></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="#">Advocate</a></li>
+            <li><a href="#">Logistics</a></li>
+            <li><a href="#">Volunteer</a></li>
+            <li><a href="https://www.fundsurfer.com/crowdfund/UkrainianAid" target="_blank">Donation</a></li>
+            <li><a href="#">Coordination</a></li>
           </ul>
         </div>
 
@@ -42,11 +44,14 @@ const Footer = () => {
           <h4>Contact Us</h4>
      
           <p>
-            A108 Adam Street <br/>
-            New York, NY 535022<br/>
-            United States <br/><br/>
-            <strong>Phone:</strong> +1 5589 55488 55<br/>
-            <strong>Email:</strong> info@example.com<br/>
+          Presidium Network CIC <br/>
+          Company number 13716487<br/>
+          6 Painswick Heights<br/>
+          Yokehouse Lane<br/>
+          Stroud<br/>
+            England, GL6 7QS<br/><br/>
+ d
+            <strong>Email:</strong>  info@presidiumnetwork.com<br/>
           </p>
           
 
