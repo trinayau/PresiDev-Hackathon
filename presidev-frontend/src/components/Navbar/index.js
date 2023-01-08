@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 const Navbar = () => {
-    const currentUser = true;
+    const currentUser = false;
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -199,16 +199,28 @@ const Navbar = () => {
                 Logout
               </Button>
             ) : (
+              <>
               <Button
                 key={'register'}
-                onClick={() => handleLink('/signup')}
-                sx={{ my: 2, color: '#EA526F', display: 'block', "&:hover": {
+                onClick={() => handleLink('/#contact')}
+                sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6)', display: 'block', "&:hover": {
                   color: '#07060A',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease-in'}}}
               >
                 Register
               </Button>
+              <Button
+              key={'login'}
+              onClick={() => handleLink('/login')}
+              sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6)', display: 'block', "&:hover": {
+                color: '#07060A',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease-in'}}}
+            >
+              Login
+            </Button>
+            </>
             )}
 
              
