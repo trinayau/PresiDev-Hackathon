@@ -25,6 +25,7 @@ const Footer = () => {
             <li><HashLink to="/">Home</HashLink></li>
             <li><HashLink to="/#about">About us</HashLink></li>
             <li><HashLink to="/#contact">Contact</HashLink></li>
+            <li><HashLink to="/#contact">Register</HashLink></li>
             <li><Link to="/login">Login</Link></li>
           </ul>
         </div>
@@ -49,8 +50,7 @@ const Footer = () => {
           6 Painswick Heights<br/>
           Yokehouse Lane<br/>
           Stroud<br/>
-            England, GL6 7QS<br/><br/>
- d
+          England, GL6 7QS<br/><br/>
             <strong>Email:</strong>  info@presidiumnetwork.com<br/>
           </p>
           

@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavHashLink } from 'react-router-hash-link';
 
 const Navbar = () => {
-    const currentUser = false;
+    const currentUser = true;
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
