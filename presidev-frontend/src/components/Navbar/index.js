@@ -12,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { NavHashLink } from 'react-router-hash-link';
+
 const Navbar = () => {
     const currentUser = false;
 
@@ -156,7 +158,7 @@ const Navbar = () => {
            
             <Button
                 key={'account'}
-                onClick={() => handleLink('/account')}
+                onClick={() => handleLink('/')}
                 sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
                   color: 'rgba(255, 255, 255, 0.6)',
                   textDecoration: 'none',
@@ -164,10 +166,10 @@ const Navbar = () => {
               >
                 Home
               </Button>
-        
+              <NavHashLink to="/#about" smooth>
               <Button
                 key={'contact'}
-                onClick={() => handleLink('/account')}
+                
                 sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
                   color: '#52796f',
                   textDecoration: 'none',
@@ -175,16 +177,18 @@ const Navbar = () => {
               >
                 About
               </Button>
+              </NavHashLink>
+              <NavHashLink to="/#contact" smooth>
               <Button
                 key={'contact'}
-                onClick={() => handleLink('/account')}
-                sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
+                     sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
                   color: '#52796f',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease-in'}}}
               >
                 Contact
               </Button>
+              </NavHashLink>
               
             {currentUser ? (
             
@@ -200,9 +204,9 @@ const Navbar = () => {
               </Button>
             ) : (
               <>
+            <NavHashLink to="/#contact" smooth>
               <Button
                 key={'register'}
-                onClick={() => handleLink('/#contact')}
                 sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6)', display: 'block', "&:hover": {
                   color: '#07060A',
                   textDecoration: 'none',
@@ -210,6 +214,8 @@ const Navbar = () => {
               >
                 Register
               </Button>
+            </NavHashLink>
+        
               <Button
               key={'login'}
               onClick={() => handleLink('/login')}
