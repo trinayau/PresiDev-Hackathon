@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
+import PureCounter from '@srexi/purecounterjs';
 
 const HomePage = () => {
 
@@ -9,6 +10,7 @@ const HomePage = () => {
             duration: 1000,
             once: true
         });
+        new PureCounter();
     }, []);
 
 
@@ -22,7 +24,7 @@ const HomePage = () => {
           <p>Presidium Platform is a platform built for members of the Presidium Network. Add common items to your order, or request custom products delivered directly to you. Get in touch to request an account and find out how Presidium Network can help you.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-telephone"></i><span>Contact Us</span></a>
+            <a href="#contact" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-telephone"></i><span>Contact Us</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
@@ -77,7 +79,7 @@ const HomePage = () => {
         </section>
         <main>
         <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up">
 
         <div class="section-header">
           <h2>About Us</h2>
@@ -109,9 +111,134 @@ const HomePage = () => {
 
               <div class="position-relative mt-4">
                 <img src="https://images.unsplash.com/photo-1635006304757-a02d75887177?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="img-fluid rounded-4" alt=""/>
-                <a href="https://vimeo.com/635308356?embedded=true&source=video_title&owner=154786827" class="glightbox play-btn"></a>
+                <a href="https://vimeo.com/635308356?embedded=true&source=video_title&owner=154786827" class="glightbox play-btn" target="_blank"></a>
               </div>
             </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section id="stats-counter" class="stats-counter">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 align-items-center">
+
+          <div class="col-lg-6">
+            <img src="assets/img/boxes.png" alt="" class="img-fluid"/>
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Ukrainian Hospitals</strong> supplied with aid</p>
+            </div>
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="400" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Tons</strong> of aid able to be delivered in Ukraine per day</p>
+            </div>
+
+            <div class="stats-item d-flex align-items-center">
+              <span data-purecounter-start="0" data-purecounter-end="2000" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Evacuations</strong> of Afghan nationals from the country</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <section id="call-to-action" class="call-to-action">
+      <div class="container text-center" data-aos="zoom-out">
+        <a href="https://www.fundsurfer.com/crowdfund/UkrainianAid" target="_blank"></a>
+        <h3>Presidium Network Emergency Winter Medical Appeal
+</h3>
+        <p> Presidium Network and Presidium Ukraine (Our Ukraine registered Charity) have launched this winter appeal so we can get medical and needed supplies to vulnerable people in the East and South who are near the front lines before the harsh winter hits.</p>
+        <p>
+ We have a network of local and international volunteers, trucks and storage space in Poland, Romania and Ukraine we now need help raising funds for Urgent medical supplies. </p>
+        <a class="cta-btn" href="https://www.fundsurfer.com/crowdfund/UkrainianAid">Donate Today</a>
+      </div>
+    </section>
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Contact</h2>
+          <p>
+            If you have any questions or would like to get involved with the Presidium Network, please contact us.
+          </p>
+        </div>
+
+        <div class="row gx-lg-0 gy-4">
+
+          <div class="col-lg-4">
+
+            <div class="info-container d-flex flex-column align-items-center justify-content-center">
+              <div class="info-item d-flex">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h4>Location:</h4>
+                  <p>6 Painswick Heights
+Yokehouse Lane
+Stroud, England
+GL6 7QS
+</p>
+                </div>
+              </div>
+
+              <div class="info-item d-flex">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h4>Email:</h4>
+                  <p>info@presidiumnetwork.com</p>
+                </div>
+              </div>
+
+              {/* <div class="info-item d-flex">
+                <i class="bi bi-phone flex-shrink-0"></i>
+                <div>
+                  <h4>Call:</h4>
+                  <p>+1 5589 55488 55</p>
+                </div>
+              </div> */}
+
+              <div class="info-item d-flex">
+                <i class="bi bi-clock flex-shrink-0"></i>
+                <div>
+                  <h4>Open Hours:</h4>
+                  <p>Mon-Sat: 11AM - 23PM</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-8">
+            <form action="#" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required/>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required/>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required/>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
           </div>
         </div>
 
