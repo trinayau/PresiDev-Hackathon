@@ -166,9 +166,10 @@ const HomePage = () => {
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Contact</h2>
+          <h2>Contact & Registration</h2>
+ 
           <p>
-            If you have any questions or would like to get involved with the Presidium Network, please contact us.
+            To register for an account and start using the Presidium Platform, please contact us using the form below and we will get back to you as soon as possible.
           </p>
         </div>
 
