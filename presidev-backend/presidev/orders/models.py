@@ -28,7 +28,7 @@ class OrganisationType(models.Model):
 class UserExtended(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=64, null=True)
-    location = models.ForeignKey(Location)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
 
 class Category(models.Model):
