@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class Status(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
 
@@ -24,8 +23,8 @@ class Organisation(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=256, null=False, blank=False)
     verified = models.BooleanField(default=False)
-    organisation_type = models.ForeignKey(OrganisationType)
-    location = models.ForeignKey(Location)
+    organisation_type = models.ForeignKey(OrganisationType, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
 
 class Category(models.Model):
@@ -35,8 +34,8 @@ class Category(models.Model):
 class Order(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=256, null=False, blank=False)
-    status = models.ForeignKey(Status)
-    owner = models.ForeignKey(Organisation)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Organisation, on_delete=models.CASCADE)
 
 
 class Item(models.Model):
@@ -56,7 +55,7 @@ class OrderItems(models.Model):
 class ItemPricing(models.Model):
     quantity = models.IntegerField()
     cost = models.FloatField()
-    item = models.ForeignKey(Item)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
 
 """
