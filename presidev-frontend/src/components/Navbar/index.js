@@ -24,6 +24,7 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const navigate = useNavigate();
+
   let { user, logoutuser } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
@@ -111,30 +112,35 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              
-               <MenuItem key={'Products'} 
-              onClick={() => handleLink('/products')}
+              <NavHashLink to="/" onClick={handleCloseNavMenu} style={{textDecoration: 'none', color: '#000'}}>
+               <MenuItem key={'home'} 
+               >
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+                </NavHashLink>
+              <NavHashLink to="/#about" onClick={handleCloseNavMenu} style={{textDecoration: 'none', color: '#000'}}>
+               <MenuItem key={'about'} 
                >
                   <Typography textAlign="center">About</Typography>
                 </MenuItem>
-                <MenuItem key={'Suppliers'} 
-              onClick={() => handleLink('/suppliers')}
-              
+                </NavHashLink>
+                <NavHashLink to="/#contact" onClick={handleCloseNavMenu}>
+                <MenuItem key={'Contact'} 
                >
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
-                <MenuItem key={'Restaurants'} 
-               onClick={() => handleLink('/restaurants')}
-             
+                </NavHashLink>
+                {user ?  (<MenuItem key={'logout'} 
+               onClick={() => logoutuser()}
                >
-                  <Typography textAlign="center">Register</Typography>
-                </MenuItem>
-                <MenuItem key={'contact'} 
-               onClick={() => handleLink('/contact')}
-              
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>)
+                 : ( <MenuItem key={'login'} 
+               onClick={() => handleLink('/login')}
                >
                   <Typography textAlign="center">Login</Typography>
-                </MenuItem>
+                </MenuItem>)}
+               
         
             </Menu>
           </Box>
@@ -161,7 +167,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', lg: 'flex', xl: 'flex', flexDirection: "row",    justifyContent: "end" } }}>
            
             <Button
-                key={'account'}
+                key={'home'}
                 onClick={() => handleLink('/')}
                 sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
                   color: 'rgba(255, 255, 255, 0.6)',
@@ -195,7 +201,6 @@ const Navbar = () => {
               </NavHashLink>
               
             {user ? (
-            
               <Button
                 key={'logout'}
                 onClick={() => logoutuser()}
@@ -208,33 +213,20 @@ const Navbar = () => {
               </Button>
             ) : (
               <>
-            <NavHashLink to="/#contact" smooth>
-              <Button
-                key={'register'}
-                sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6)', display: 'block', "&:hover": {
-                  color: '#07060A',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease-in'}}}
-              >
-                Register
-              </Button>
-            </NavHashLink>
-        
               <Button
               key={'login'}
-              onClick={() => handleLink('/login')}
               sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6)', display: 'block', "&:hover": {
                 color: '#07060A',
                 textDecoration: 'none',
                 transition: 'all 0.2s ease-in'}}}
             >
+              <NavHashLink to="/login" smooth>
               Login
+              </NavHashLink>
             </Button>
             </>
             )}
 
-             
-            
           </Box>
           
 {/* End mobile */}

@@ -15,10 +15,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
         queryset = UserExtended.objects.all()
         user_type = self.request.query_params.get("user_type")
-
+        # pop off the / at the end of the url
+        user_type = user_type[:-1]
         if user_type is not None:
             return queryset.filter(user_type__name=user_type)
-
         return queryset
 
 

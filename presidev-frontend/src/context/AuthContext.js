@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    console.log(e.target.username.value)
     let response = await fetch("http://localhost:8000/api/token/", {
       method: "POST",
       headers: {
@@ -37,9 +36,10 @@ export const AuthProvider = ({ children }) => {
       }),
     });
     let data = await response.json();
+    console.log(data )
     if (response.status === 200) {
       localStorage.setItem("authTokens", JSON.stringify(data));
-      
+      console.log(data)
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
       enqueueSnackbar('Login Successful!', {variant: 'success', anchorOrigin: {

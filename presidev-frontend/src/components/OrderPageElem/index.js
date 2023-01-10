@@ -62,7 +62,7 @@ const OrderPageElem = ({order}) => {
                                     <div id="tracker"></div>
                 </div>
             </div>
-
+            
         </div>
         
         

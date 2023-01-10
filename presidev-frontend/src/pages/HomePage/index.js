@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import PureCounter from '@srexi/purecounterjs';
 
@@ -13,6 +14,12 @@ const HomePage = () => {
         new PureCounter();
     }, []);
 
+    const navigate = useNavigate();
+
+    const handleLink = (link) => {
+      navigate(link);
+    };
+
 
     return ( 
         <>
@@ -23,7 +30,8 @@ const HomePage = () => {
           <h2>Welcome to <span>Presidium Platform</span></h2>
           <p>Presidium Platform is a platform built for members of the Presidium Network. Add common items to your order, or request custom products delivered directly to you. Get in touch to request an account and find out how Presidium Network can help you.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started">Get Started</a>
+            <div class="btn-get-started" onClick={() => handleLink('/login')}
+            >Get Started</div>
             <a href="#contact" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-telephone"></i><span>Contact Us</span></a>
           </div>
         </div>

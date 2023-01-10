@@ -25,7 +25,6 @@ const OrderDetail = () => {
         const response = await axios.get(`${API_ENDPOINT}/orders/order`, {headers: {Authorization: `Bearer ${authTokens.access}`}})
         if (response.status === 200) {
           setOrders(response.data)
-          console.log(response.data)
           setLoading(false)
         }
       } catch(err) {
