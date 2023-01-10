@@ -44,6 +44,7 @@ class UserExtended(models.Model):
        return self.user.username
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
 

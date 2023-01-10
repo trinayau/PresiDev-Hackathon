@@ -2717,3 +2717,57 @@
   .footer .credits a {
     color: #fff;
   }
+
+  /* profile page */
+  .profile-hero{
+    width: 100%;
+    position: relative;
+    background: var(--color-primary);
+    padding: 50px 0 0 0;
+  }
+
+  .profile-hero p{
+    color:rgba(255, 255, 255, 0.6)
+  }
+
+  /* sidebar */
+
+  .sidebar{
+    padding: 0 10px;
+  }
+  .sidebar__item
+  {
+    margin-bottom: 30px;
+
+  }
+
+  .sidebar__title{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .sidebar___list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar__list-item{
+    list-style: none;
+    padding: 10px 40px;
+    background-color: #f9f9f9;
+    border: 1px solid #ebebeb;
+    cursor: pointer;
+    color: var(--color-primary)
+  }
+
+  .active{
+
+    border: 1px solid black;
+  }
+
+/* order detail */
+  .order-detail{
+    padding: 0 10px;
+  }
