@@ -2762,7 +2762,7 @@
     color: var(--color-primary)
   }
 
-  .active{
+  .profile-active{
 
     border: 1px solid black;
   }

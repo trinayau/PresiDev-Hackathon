@@ -31,19 +31,19 @@ const AccountPage = () => {
 
     const toggleActiveClass = (item) => {
         const profileItem = document.querySelector('.sidebar__list-item:nth-child(1)');
-        profileItem.classList.remove('active');
+        profileItem.classList.remove('profile-active');
         const ordersItem = document.querySelector('.sidebar__list-item:nth-child(2)');
-        ordersItem.classList.remove('active');
+        ordersItem.classList.remove('profile-active');
         const wishlistItem = document.querySelector('.sidebar__list-item:nth-child(3)');
-        wishlistItem.classList.remove('active');
+        wishlistItem.classList.remove('profile-active');
         if(item === "profileItem"){
-            profileItem.classList.add('active');
+            profileItem.classList.add('profile-active');
         }
         if(item === "ordersItem"){
-            ordersItem.classList.add('active');
+            ordersItem.classList.add('profile-active');
         }
         if(item === "wishlistItem"){
-            wishlistItem.classList.add('active');
+            wishlistItem.classList.add('profile-active');
         }
 
     }

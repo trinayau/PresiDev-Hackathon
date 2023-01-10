@@ -4,7 +4,7 @@ const Sidebar = ({ profileClick, ordersClick, wishlistClick}) => {
 
         <div className="sidebar__item">
             <ul className="sidebar__list d-flex flex-column">
-                <li className="sidebar__list-item active" onClick={profileClick}>
+                <li className="sidebar__list-item profile-active" onClick={profileClick}>
                         Profile
                 </li>
                 <li className="sidebar__list-item" onClick={ordersClick}>
