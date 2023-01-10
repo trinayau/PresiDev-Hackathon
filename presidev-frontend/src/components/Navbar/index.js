@@ -267,7 +267,7 @@ const Navbar = () => {
               <MenuItem key='profile' onClick={() => handleLink('/account')}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem key='logout' onClick={() => { handleCloseUserMenu() }} >
+                <MenuItem key='logout' onClick={() => { logoutuser(); handleCloseUserMenu() }} >
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               
