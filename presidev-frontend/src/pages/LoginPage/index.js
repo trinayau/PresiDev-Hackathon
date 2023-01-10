@@ -137,11 +137,6 @@ export default function LoginPage() {
                   Forgot password?
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2" sx={{ color: "#057465" }}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
           </Box>
         </Box>
