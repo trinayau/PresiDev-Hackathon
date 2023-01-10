@@ -5,34 +5,50 @@ from django.contrib.auth.models import User
 class Status(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
 
-
-class UserType(models.Model):
-    name = models.CharField(max_length=128, null=False, blank=False)
-    description = models.CharField(max_length=256, null=False, blank=False)
-
+    def __str__(self):
+       return self.name
 
 class Location(models.Model):
-    street_number = models.CharField(max_length=64, null=False)
-    first_line = models.CharField(max_length=64, null=False)
-    second_line = models.CharField(max_length=64, null=False)
-    county = models.CharField(max_length=64, null=False)
+    street_number = models.CharField(max_length=64, null=False, blank=True)
+    first_line = models.CharField(max_length=64, null=False, blank=True)
+    second_line = models.CharField(max_length=64, null=False, blank=True)
+    county = models.CharField(max_length=64, null=False, blank=True)
     country = models.CharField(max_length=128, null=False, blank=False)
-    postcode = models.CharField(max_length=64, null=False)
+    postcode = models.CharField(max_length=64, null=False, blank=False)
 
+    def __str__(self):
+       return self.country + ' - ' + self.postcode
 
 class OrganisationType(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=256, null=False, blank=False)
 
+    def __str__(self):
+       return self.name
+
+
+class UserType(models.Model):
+    name = models.CharField(max_length=128, null=False, blank=False)
+    description = models.CharField(max_length=256, null=False, blank=False)
+
+    def __str__(self):
+       return self.name
 
 class UserExtended(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=64, null=True)
-    location = models.ForeignKey(Location)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+       return self.user.username
 
 
 class Category(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
+
+    def __str__(self):
+       return self.name
 
 
 class Item(models.Model):
@@ -41,6 +57,9 @@ class Item(models.Model):
     image_url = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     categories = models.ManyToManyField(Category)
+
+    def __str__(self):
+       return self.name
 
 
 class Organisation(models.Model):
@@ -51,6 +70,8 @@ class Organisation(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     organisation_items = models.ManyToManyField(Item, through="OrganisationItem")
 
+    def __str__(self):
+       return self.name
 
 class OrganisationItem(models.Model):
     organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE)
@@ -64,7 +85,10 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     owner = models.ForeignKey(Organisation, on_delete=models.CASCADE)
-    orders = models.ManyToManyField(Item, through="OrderItems")
+    items = models.ManyToManyField(Item, through="OrderItems")
+
+    def __str__(self):
+       return self.owner.name + ' - ' + self.name
 
 
 class OrderItems(models.Model):
