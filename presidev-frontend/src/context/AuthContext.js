@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { useSnackbar } from 'notistack';
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   let [authTokens, setAuthTokens] = useState(() => 
     localStorage.getItem("authTokens")
@@ -37,11 +39,13 @@ export const AuthProvider = ({ children }) => {
     let data = await response.json();
     if (response.status === 200) {
       localStorage.setItem("authTokens", JSON.stringify(data));
+      
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
+      enqueueSnackbar('Login Successful!', {variant: 'success'})
       navigate("/account?redirect=true");
     } else {
-      alert("Invalid Username or Password");
+      enqueueSnackbar('Invalid username or password', {variant: 'warning'})
     }
   };
 

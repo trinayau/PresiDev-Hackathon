@@ -4,49 +4,49 @@ import { Sidebar, OrderDetail, ProfileDetail, WishlistDetail } from "../../compo
 
 const AccountPage = () => {
   const { user } = useContext(AuthContext);
-    const [profile, setProfile] = useState(true);
-    const [orders, setOrders] = useState(false);
-    const [wishlist, setWishlist] = useState(false);
+  const [profile, setProfile] = useState(true);
+  const [orders, setOrders] = useState(false);
+  const [wishlist, setWishlist] = useState(false);
 
-    const profileClick = () => {
-        setProfile(true);
-        setOrders(false);
-        setWishlist(false);
-        toggleActiveClass("profileItem")
+  const profileClick = () => {
+    setProfile(true);
+    setOrders(false);
+    setWishlist(false);
+    toggleActiveClass("profileItem")
+  }
+
+  const ordersClick = () => {
+    setProfile(false);
+    setOrders(true);
+    setWishlist(false);
+    toggleActiveClass("ordersItem")
+  }
+
+  const wishlistClick = () => {
+    setProfile(false);
+    setOrders(false);
+    setWishlist(true);
+    toggleActiveClass("wishlistItem")
+  }
+
+  const toggleActiveClass = (item) => {
+    const profileItem = document.querySelector('.sidebar__list-item:nth-child(1)');
+    profileItem.classList.remove('profile-active');
+    const ordersItem = document.querySelector('.sidebar__list-item:nth-child(2)');
+    ordersItem.classList.remove('profile-active');
+    const wishlistItem = document.querySelector('.sidebar__list-item:nth-child(3)');
+    wishlistItem.classList.remove('profile-active');
+    if (item === "profileItem") {
+      profileItem.classList.add('profile-active');
+    }
+    if (item === "ordersItem") {
+      ordersItem.classList.add('profile-active');
+    }
+    if (item === "wishlistItem") {
+      wishlistItem.classList.add('profile-active');
     }
 
-    const ordersClick = () => {
-        setProfile(false);
-        setOrders(true);
-        setWishlist(false);
-        toggleActiveClass("ordersItem")
-    }
-
-    const wishlistClick = () => {
-        setProfile(false);
-        setOrders(false);
-        setWishlist(true);
-        toggleActiveClass("wishlistItem")
-    }
-
-    const toggleActiveClass = (item) => {
-        const profileItem = document.querySelector('.sidebar__list-item:nth-child(1)');
-        profileItem.classList.remove('profile-active');
-        const ordersItem = document.querySelector('.sidebar__list-item:nth-child(2)');
-        ordersItem.classList.remove('profile-active');
-        const wishlistItem = document.querySelector('.sidebar__list-item:nth-child(3)');
-        wishlistItem.classList.remove('profile-active');
-        if(item === "profileItem"){
-            profileItem.classList.add('profile-active');
-        }
-        if(item === "ordersItem"){
-            ordersItem.classList.add('profile-active');
-        }
-        if(item === "wishlistItem"){
-            wishlistItem.classList.add('profile-active');
-        }
-
-    }
+  }
 
   return (
     <>
@@ -57,12 +57,12 @@ const AccountPage = () => {
         </div>
       </section>
       <section className="profile-content-container d-flex">
-        <Sidebar profileClick={profileClick} ordersClick={ordersClick} wishlistClick={wishlistClick}/>
+        <Sidebar profileClick={profileClick} ordersClick={ordersClick} wishlistClick={wishlistClick} />
 
-        {profile && <ProfileDetail/>}
-        {orders && <OrderDetail/>}
-        {wishlist && <WishlistDetail/>}
-        
+        {profile && <ProfileDetail />}
+        {orders && <OrderDetail />}
+        {wishlist && <WishlistDetail />}
+
 
       </section>
     </>
