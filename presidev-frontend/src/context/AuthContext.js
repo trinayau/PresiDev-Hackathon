@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
+  const  {enqueueSnackbar}  = useSnackbar();
 
   let [authTokens, setAuthTokens] = useState(() => 
     localStorage.getItem("authTokens")
@@ -42,7 +42,10 @@ export const AuthProvider = ({ children }) => {
       
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
-      enqueueSnackbar('Login Successful!', {variant: 'success'})
+      enqueueSnackbar('Login Successful!', {variant: 'success', anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center'
+      }})
       navigate("/account?redirect=true");
     } else {
       enqueueSnackbar('Invalid username or password', {variant: 'warning'})

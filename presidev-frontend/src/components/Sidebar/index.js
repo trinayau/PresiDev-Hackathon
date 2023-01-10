@@ -11,7 +11,7 @@ const Sidebar = ({ profileClick, ordersClick, wishlistClick}) => {
                         Orders
                 </li>
                 <li className="sidebar__list-item" onClick={wishlistClick}>      
-                        Wishlist
+                        Favourite
                 </li>
             </ul>
         </div>

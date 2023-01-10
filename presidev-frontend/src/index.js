@@ -10,11 +10,11 @@ import { SnackbarProvider } from 'notistack'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <SnackbarProvider>
+    <SnackbarProvider  anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'center',}}>
       <AuthProvider>
-      <React.StrictMode>
         <App />
-      </React.StrictMode>
       </AuthProvider>
     </SnackbarProvider>
   </Router>

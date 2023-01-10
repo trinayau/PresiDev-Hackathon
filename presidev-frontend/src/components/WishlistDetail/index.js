@@ -1,6 +1,6 @@
 const WishlistDetail = () => {
     return ( <div className="wishlist-detail">
-        <h1>Wishlist</h1>
+        <h1>Favourite</h1>
     </div> );
 }
  

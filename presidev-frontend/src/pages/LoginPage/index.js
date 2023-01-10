@@ -10,10 +10,7 @@ import Box from "@mui/material/Box";
 import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Alert, Snackbar } from '@mui/material';
-
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import AuthContext from "../../context/AuthContext";
 
@@ -38,17 +35,9 @@ function Copyright(props) {
 
 export default function LoginPage() {
 
-  const navigate = useNavigate();
   let {loginUser} = useContext(AuthContext);
 
   const [err,setErr] = useState(false);
-
-  const [state, setState] = useState({
-    open: true,
-    vertical: 'top',
-    horizontal: 'center',
-  });
-  const { vertical, horizontal, open } = state;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
