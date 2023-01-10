@@ -15,6 +15,8 @@ import { Alert, Snackbar } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from "react";
 
+import AuthContext from "../../context/AuthContext";
+
 
 function Copyright(props) {
   return (
@@ -37,6 +39,7 @@ function Copyright(props) {
 export default function LoginPage() {
 
   const navigate = useNavigate();
+  let {loginUser} = useContext(AuthContext);
 
   const [err,setErr] = useState(false);
 
@@ -49,8 +52,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const email  = event.target[0].value;
-    const password = event.target[2].value;
+    loginUser(event);
 
   };
 
@@ -86,11 +88,11 @@ export default function LoginPage() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              htmlFor="email"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              htmlFor="username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             {/* <TextField

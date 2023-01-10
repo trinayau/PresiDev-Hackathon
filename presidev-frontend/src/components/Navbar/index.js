@@ -14,13 +14,17 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { NavHashLink } from 'react-router-hash-link';
 
-const Navbar = () => {
-    const currentUser = true;
+import {  AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
+const Navbar = () => {
+  
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const navigate = useNavigate();
+  let { user, logoutuser } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -190,11 +194,11 @@ const Navbar = () => {
               </Button>
               </NavHashLink>
               
-            {currentUser ? (
+            {user ? (
             
               <Button
                 key={'logout'}
-                // onClick={() => logoutuser()}
+                onClick={() => logoutuser()}
                 sx={{ my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
                   color: '#07060A',
                   textDecoration: 'none',
@@ -235,11 +239,11 @@ const Navbar = () => {
           
 {/* End mobile */}
 
-          {currentUser && <Box sx={{ flexGrow: 0}}>
+          {user && <Box sx={{ flexGrow: 0}}>
             <Tooltip title="Open settings">
             
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={currentUser && currentUser.displayName} src="/static/images/avatar/2.jpg" sx={{backgroundColor:'#00796b'}}/>
+                <Avatar alt={user && user.displayName} src="/static/images/avatar/2.jpg" sx={{backgroundColor:'#00796b'}}/>
               </IconButton>
             
             </Tooltip>
