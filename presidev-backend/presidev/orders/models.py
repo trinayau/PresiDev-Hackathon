@@ -34,17 +34,6 @@ class UserType(models.Model):
     def __str__(self):
        return self.name
 
-class UserExtended(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=64, null=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
-    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, null=True)
-
-    def __str__(self):
-       return self.user.username
-
-
-
 class Category(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
 
@@ -73,6 +62,18 @@ class Organisation(models.Model):
 
     def __str__(self):
        return self.name
+
+
+class UserExtended(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    phone = models.CharField(max_length=64, null=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, null=True)
+    organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+       return self.user.username
+
 
 class OrganisationItem(models.Model):
     organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE)
