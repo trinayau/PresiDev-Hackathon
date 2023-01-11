@@ -21,7 +21,28 @@ class UserViewSet(viewsets.ModelViewSet):
             return queryset.filter(user_type__name=user_type)
         return queryset
 
+class SingleUserViewSet(viewsets.ModelViewSet):
+    queryset = UserExtended.objects.all()
+    serializer_class = UserExtendedSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
 
+    def get_queryset(self):
+
+        queryset = UserExtended.objects.all()
+        user_id = self.request.query_params.get("user_id")
+        # for some reason, the user_id in the jWT is the email
+        if user_id is not None:
+            return queryset.filter(email=user_id)
+        return queryset
+
+    def get_queryset(self):
+
+        queryset = UserExtended.objects.all()
+        user_id = self.request.query_params.get("user_id")
+        if user_id is not None:
+            return queryset.filter(id=user_id)
+        return queryset
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
