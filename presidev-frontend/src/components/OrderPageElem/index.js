@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-const OrderPageElem = ({order}) => {
+const OrderPageElem = ({ order }) => {
     const [orderStatus, setOrderStatus] = useState(order.status.name.toLowerCase())
 
     // add .green to step depending on order status:
     useEffect(() => {
+        
         if (orderStatus === "placed") {
             document.getElementById("step-1").classList.add("green")
         } else if (orderStatus === "accepted") {
@@ -28,45 +29,53 @@ const OrderPageElem = ({order}) => {
         }
     }, [orderStatus])
 
-    return ( 
-    <div className="orderpage-elem container order">
-        <div className="orderpage-elem__item d-flex row">
-            <div className="orderpage-elem__item-info ">
-                <div className="row">
-                <p className="h4 col-6">Order #{order.id}</p>
-                <div class="btn btn-primary text-uppercase col-6">order info</div>
+    const parseDate = (date) => {
+        const orderDate = new Date(date)
+        const year = orderDate.getFullYear()
+        const month = orderDate.getMonth()+1
+        const day = orderDate.getDate()
+        return `${day}/${month}/${year}`
+    }
+
+    return (
+        <div className="orderpage-elem container order">
+            <div className="orderpage-elem__item d-flex row">
+                <div className="orderpage-elem__item-info ">
+                    <div className="row">
+                        <p className="h4 col-6">Order #{order.id}</p>
+                        <btn class="btn btn-primary text-uppercase col-6" onClick={() => console.log('open order')} >order info</btn>
+                    </div>
+                    <p>Products: {order.items.length}</p>
+                    <p>Order date: {parseDate(order.created_at)}</p>
                 </div>
-                <p>Products: {order.items.length}</p>
-                <p>Order date: 12.1.2023</p>
-            </div>
-            <div className="orderpage-elem__item-status ">
-                <p classname="h4">Status: {order.status.name}</p>
-                <div className="progressbar-track">
-                                    <ul className="progressbar">
-                                        <li id="step-1" className="text-muted">
-                                            <span className="fas fa-gift "></span>
-                                        </li>
-                                        <li id="step-2" className="text-muted">
-                                            <span className="fas fa-check"></span>
-                                        </li>
-                                        <li id="step-3" className="text-muted">
-                                            <span className="fas fa-box"></span>
-                                        </li>
-                                        <li id="step-4" className="text-muted">
-                                            <span className="fas fa-truck"></span>
-                                        </li>
-                                        <li id="step-5" className="text-muted">
-                                            <span className="fas fa-box-open"></span>
-                                        </li>
-                                    </ul>
-                                    <div id="tracker"></div>
+                <div className="orderpage-elem__item-status ">
+                    <p classname="h4">Status: {order.status.name}</p>
+                    <div className="progressbar-track">
+                        <ul className="progressbar">
+                            <li id="step-1" className="text-muted">
+                                <span className="fas fa-gift "></span>
+                            </li>
+                            <li id="step-2" className="text-muted">
+                                <span className="fas fa-check"></span>
+                            </li>
+                            <li id="step-3" className="text-muted">
+                                <span className="fas fa-box"></span>
+                            </li>
+                            <li id="step-4" className="text-muted">
+                                <span className="fas fa-truck"></span>
+                            </li>
+                            <li id="step-5" className="text-muted">
+                                <span className="fas fa-box-open"></span>
+                            </li>
+                        </ul>
+                        <div id="tracker"></div>
+                    </div>
                 </div>
+
             </div>
-            
-        </div>
-        
-        
-    </div> );
+
+
+        </div>);
 }
- 
+
 export default OrderPageElem;
