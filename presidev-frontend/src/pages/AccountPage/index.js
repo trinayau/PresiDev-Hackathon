@@ -52,8 +52,8 @@ const AccountPage = () => {
     <>
       <section className="profile-hero">
         <div className="hero-body px-5">
-          <h1 className="text-white">X Hospital</h1>
-          <p>Kyiv, Ukraine</p>
+          <h1 className="text-white">{user?.profile?.organisation?.name || 'No organisation'}</h1>
+          <p>{`${user?.profile?.organisation?.location?.county || ''}, ${user?.profile?.organisation?.location?.country || ''}`}</p>
         </div>
       </section>
       <section className="profile-content-container d-flex">

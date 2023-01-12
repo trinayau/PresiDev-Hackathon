@@ -5,8 +5,8 @@ class UserExtendedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserExtended
-        fields = ['user', 'phone', 'location', 'user_type']
-        depth = 1
+        fields = ['user', 'phone', 'location', 'user_type', 'organisation']
+        depth = 2
 
 
 class OrderSerializer(serializers.ModelSerializer):
