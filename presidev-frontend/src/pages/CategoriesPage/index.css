@@ -1,7 +1,7 @@
 
 /* product listing */
 
-section {
+.productsPage section {
     background-color: var(--bg-color);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -25,7 +25,7 @@ section {
 /* media screens */
 
 @media only screen and (max-width: 768px) {
-    section{
+    .productsPage section{
         padding: 0;
     }
 
