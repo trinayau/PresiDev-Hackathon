@@ -9,18 +9,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar, Box } from "@mui/material";
 
-
-
-
 const ProfileDetail = () => {
     let { user } = useContext(AuthContext);
+
 
     return (
         <Card 
             sx={{ 
-                minWidth: 500,
-                minHeight: 500,
-                marginLeft: 10
+                
             }}
             raised
         >
@@ -39,10 +35,14 @@ const ProfileDetail = () => {
                         <Avatar 
                             sx={{width: 125, height: 125, bgcolor: 'var(--color-primary)', border: 1}}
                         >{user?.name[0]}</Avatar>
+                        
+                        
                     </Box>
+                    
                 }
             />
             <CardContent>
+                
                 <Typography gutterBottom variant="h4">
                     {user?.name}
                 </Typography>
@@ -50,10 +50,11 @@ const ProfileDetail = () => {
                     {user?.profile?.organisation?.name}
                 </Typography>
                 <Typography variant="h6" color="text.secondary">
-                    User Type: {user?.profile?.user_type?.name}
+                    User Role: {user?.profile?.user_type?.name}
                 </Typography>
-                <br />
-                <br />
+                <CardActions>
+                <Button size="small">Update Details</Button>
+            </CardActions>
                 <Typography gutterBottom variant="h5" sx={{textDecoration: 'underline'}}>
                     Location
                 </Typography>
@@ -85,9 +86,7 @@ const ProfileDetail = () => {
                     Phone: {user?.profile?.phone}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Update Details</Button>
-            </CardActions>
+
         </Card>
     );
 }

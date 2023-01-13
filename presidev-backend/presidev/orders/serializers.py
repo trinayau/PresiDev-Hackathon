@@ -8,9 +8,7 @@ class UserExtendedSerializer(serializers.ModelSerializer):
         fields = ['user', 'phone', 'location', 'user_type', 'organisation']
         depth = 2
 
-
 class OrderSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Order
         fields = '__all__'

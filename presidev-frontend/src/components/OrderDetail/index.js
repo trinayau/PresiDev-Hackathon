@@ -48,7 +48,7 @@ const OrderDetail = () => {
       /> : orders.map((order) => {
         return (
           <>
-            <div class="d-flex my-4 flex-wrap">
+            <div class="d-flex my-4 flex-wrap order-stats">
               <div class="box me-4 my-1 bg-light">
                 <img className="img-fluid" src="https://www.freepnglogos.com/uploads/box-png/cardboard-box-brown-vector-graphic-pixabay-2.png"
                   alt="box" />

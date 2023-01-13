@@ -129,6 +129,11 @@ const Navbar = () => {
                     <Typography textAlign="center">Contact</Typography>
                   </MenuItem>
                 </NavHashLink>
+                <NavHashLink to="/categories" onClick={handleCloseNavMenu}>
+                  <MenuItem key={'Categories'}>
+                    <Typography textAlign="center">Categories</Typography>
+                  </MenuItem>
+                </NavHashLink>
                 {
                   user ? (
                     <MenuItem
@@ -185,7 +190,7 @@ const Navbar = () => {
               >
                 Home
               </Button>
-              <NavHashLink to="/#about" smooth>
+              <Link to="/#about" smooth>
                 <Button
                   key={'contact'}
                   sx={{
@@ -201,7 +206,7 @@ const Navbar = () => {
                 >
                   About
                 </Button>
-              </NavHashLink>
+              </Link>
               <NavHashLink to="/#contact" smooth>
                 <Button
                   key={'contact'}
@@ -216,6 +221,19 @@ const Navbar = () => {
                   Contact
                 </Button>
               </NavHashLink>
+              <Button
+                  key={'categories'}
+                  onClick={() => handleLink('/categories')}
+                  sx={{
+                    my: 2, color: 'rgba(255, 255, 255, 0.6);', display: 'block', "&:hover": {
+                      color: '#52796f',
+                      textDecoration: 'none',
+                      transition: 'all 0.2s ease-in'
+                    }
+                  }}
+                >
+                  Categories
+                </Button>
 
               {user ? (
                 <Button

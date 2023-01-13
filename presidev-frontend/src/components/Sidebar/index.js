@@ -3,7 +3,7 @@ const Sidebar = ({ profileClick, ordersClick, wishlistClick}) => {
     <div className="sidebar">
 
         <div className="sidebar__item">
-            <ul className="sidebar__list d-flex flex-column">
+            <ul className="sidebar__list flex-sm-column">
                 <li className="sidebar__list-item profile-active" onClick={profileClick}>
                         Profile
                 </li>

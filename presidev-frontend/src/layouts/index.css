@@ -2890,3 +2890,32 @@
     content: 'Delivered';
     left: -10px;
 }
+
+/* Profile */
+.css-fky5tw-MuiPaper-root-MuiCard-root{
+  min-width: 1000px;
+  min-height: 500px;
+}
+
+/* responsive sidebar */
+@media screen and (max-width: 768px) {
+
+  section{
+    padding: 20px;
+  }
+
+  .css-1v9izv9-MuiPaper-root-MuiCard-root{
+margin-left: 0px!important;
+min-width: none!important;
+min-height: none!important;
+  }
+
+  .order-stats{
+    display: none;
+  }
+
+  /* sidebar */
+  .sidebar__list-item{
+    text-align: center;
+  }
+}

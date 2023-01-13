@@ -56,12 +56,13 @@ const AccountPage = () => {
           <p>{`${user?.profile?.organisation?.location?.county || ''}, ${user?.profile?.organisation?.location?.country || ''}`}</p>
         </div>
       </section>
-      <section className="profile-content-container d-flex">
+      <section className="profile-content-container d-md-flex">
         <Sidebar profileClick={profileClick} ordersClick={ordersClick} wishlistClick={wishlistClick} />
-
+        <div className="profile-right">
         {profile && <ProfileDetail />}
         {orders && <OrderDetail />}
         {wishlist && <WishlistDetail />}
+        </div>
 
 
       </section>
