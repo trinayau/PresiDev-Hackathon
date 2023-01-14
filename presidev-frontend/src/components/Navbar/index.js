@@ -190,7 +190,7 @@ const Navbar = () => {
               >
                 Home
               </Button>
-              <Link to="/#about" smooth>
+              <NavHashLink to="/#about" smooth>
                 <Button
                   key={'contact'}
                   sx={{
@@ -206,7 +206,7 @@ const Navbar = () => {
                 >
                   About
                 </Button>
-              </Link>
+              </NavHashLink>
               <NavHashLink to="/#contact" smooth>
                 <Button
                   key={'contact'}

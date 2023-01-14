@@ -35,7 +35,9 @@ class UserType(models.Model):
        return self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length=128, null=False, blank=False)
+    name = models.CharField(max_length=128, null=True, blank=True)
+    description = models.CharField(max_length=256, blank=True, null=True)
+    img_url = models.URLField(null=True, blank=True)
 
     def __str__(self):
        return self.name

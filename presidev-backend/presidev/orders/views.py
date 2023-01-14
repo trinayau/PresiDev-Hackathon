@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import UserExtended, Order, Item
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer
+from .models import UserExtended, Order, Item, Category
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -73,4 +73,23 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
     http_method_names = ["get", "post", "put", "delete"]
-    
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get", "post", "put", "delete"]
+
+class SingleCategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
+
+    def get_queryset(self):
+
+        queryset = Category.objects.all()
+        category_id = self.request.query_params.get("category_id")
+        if category_id is not None:
+            return queryset.filter(id=category_id)
+        return queryset

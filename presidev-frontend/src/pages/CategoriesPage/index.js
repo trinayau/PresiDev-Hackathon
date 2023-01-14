@@ -1,9 +1,11 @@
 import { useEffect, useState} from 'react';
 
 import "./index.css";
-import { ProductCardMUI, CategoryCardMUI } from "../../components";
+import { ProductCardMUI, CategoryCardMUI, SearchBar } from "../../components";
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
+import { API_ENDPOINT } from '../../settings';
+import AuthContext from '../../context/AuthContext';
 
 // import { CartContext } from '../../context/Context';
 import { useContext } from 'react';
@@ -15,61 +17,44 @@ const AllProductPage = () => {
   const [latestProducts, setLatestProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  let { authTokens } = useContext(AuthContext);
 
 //   const Globalstate = useContext(CartContext);
 //   const dispatch = Globalstate.info.dispatch;
 
-//   useEffect(() =>{ 
-//     async function searchApi() {
-//       const requestLatest = "http://127.0.0.1:8000/api/v1/latest-products/";
-//       const requestCategories = "http://127.0.0.1:8000/api/v1/categories/";
+  useEffect(() =>{ 
+    async function searchApi() {
 
-//         try{
-//             const resultLatest = await axios.get(requestLatest,
-//             {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     'Accept': 'application/json'
-//             }
-         
-//         });
-//             const resultCategories = await axios.get(requestCategories,
-//             {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                     'Accept': 'application/json'
-//             }
-//         });
+      const requestCategories = "http://localhost:8000/api/v1/orders/category/";
 
-//             setLatestProducts(resultLatest.data);
-//             setCategories(resultCategories.data); 
-//             setLoading(true);
-//         }catch(err){
-//             console.error(err)
-//         }
-//     }
-//     searchApi();
-//     }, [])
+        try{
+            
+            const response = await axios.get(`${API_ENDPOINT}/orders/category`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
 
-  
-    
+            setCategories(response.data.reverse()); 
+            setLoading(true);
+        }catch(err){
+            console.error(err)
+        }
+    }
+    searchApi();
+    }, [])
 
   return (
     <div className="productsPage">
-
-      {/* latest products */}
-      <section className="search-bar">
-          <p className="product-heading">Latest Products</p>
-      </section>
-
-      <section className="latest-products">
+        <div className="container">
+   
+          <p className="product-heading h1 pt-3">Categories</p>
+          </div>
+          <SearchBar/>  
+      {/* <section className="latest-products">
         {loading ? latestProducts.map((product) => {
           return (
             <ProductCardMUI
               key={product.id}
               name={product.name}
               price={product.price}
-              image={product.image}
+              image={product.img_url}
               offset={product.offset}
               id={product.id}
             //   dispatch={dispatch}
@@ -79,7 +64,7 @@ const AllProductPage = () => {
           );
         }) : <CircularProgress sx={{color: '#52796f', textAlign:'center'}}/>}
 
-      </section>
+      </section> */}
 
       <section>
 
@@ -88,10 +73,9 @@ const AllProductPage = () => {
             <CategoryCardMUI
               key={category.id}
               catName={category.name}
-              catPrice={category.minimum_product_price}
-              catImage={category.image_url}
-              catOffset={category.minimum_offset_price}
+              catImage={category.img_url}
               catId={category.id}
+              catDesc = {category.description}
             //   dispatch={dispatch}
               product={category.cheapest_product}
 

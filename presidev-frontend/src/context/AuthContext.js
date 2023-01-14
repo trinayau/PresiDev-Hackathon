@@ -36,10 +36,8 @@ export const AuthProvider = ({ children }) => {
       }),
     });
     let data = await response.json();
-    console.log(data )
     if (response.status === 200) {
       localStorage.setItem("authTokens", JSON.stringify(data));
-      console.log(data)
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
       enqueueSnackbar('Login Successful!', {variant: 'success', anchorOrigin: {

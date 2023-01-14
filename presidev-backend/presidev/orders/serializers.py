@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserExtended, Order, Item
+from .models import UserExtended, Order, Item, Category
 
 class UserExtendedSerializer(serializers.ModelSerializer):
 
@@ -19,5 +19,12 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
+        fields = '__all__'
+        depth = 1
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
         fields = '__all__'
         depth = 1

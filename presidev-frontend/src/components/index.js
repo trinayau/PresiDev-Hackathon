@@ -7,3 +7,4 @@ export  {default as WishlistDetail} from './WishlistDetail';
 export {default as OrderPageElem} from './OrderPageElem';
 export {default as ProductCardMUI} from './ProductCardMUI';
 export {default as CategoryCardMUI} from './CategoryCardMUI';
+export {default as SearchBar} from './SearchBar';
