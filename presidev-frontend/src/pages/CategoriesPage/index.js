@@ -1,16 +1,12 @@
 import { useEffect, useState} from 'react';
-
 import "./index.css";
 import { ProductCardMUI, CategoryCardMUI, SearchBar } from "../../components";
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
 import { API_ENDPOINT } from '../../settings';
 import AuthContext from '../../context/AuthContext';
-
 // import { CartContext } from '../../context/Context';
 import { useContext } from 'react';
-
-
 
 const AllProductPage = () => {
 
@@ -24,13 +20,8 @@ const AllProductPage = () => {
 
   useEffect(() =>{ 
     async function searchApi() {
-
-      const requestCategories = "http://localhost:8000/api/v1/orders/category/";
-
         try{
-            
             const response = await axios.get(`${API_ENDPOINT}/orders/category`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
-
             setCategories(response.data.reverse()); 
             setLoading(true);
         }catch(err){

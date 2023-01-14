@@ -105,3 +105,5 @@ class ItemPricing(models.Model):
     quantity = models.IntegerField()
     cost = models.FloatField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+

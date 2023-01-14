@@ -93,3 +93,19 @@ class SingleCategoryViewSet(viewsets.ModelViewSet):
         if category_id is not None:
             return queryset.filter(id=category_id)
         return queryset
+
+class ItemCategoryViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
+
+    def get_queryset(self):
+
+        queryset = Item.objects.all()
+        category_id = self.request.query_params.get("category_id")
+        category_id = category_id[:-1]
+        print(category_id)
+        if category_id is not None:
+            return queryset.filter(categories__id=category_id)
+        return queryset
