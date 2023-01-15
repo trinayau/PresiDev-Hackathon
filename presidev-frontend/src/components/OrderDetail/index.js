@@ -4,10 +4,7 @@ import { API_ENDPOINT } from '../../settings'
 import AuthContext from '../../context/AuthContext';
 import ClipLoader from "react-spinners/ClipLoader";
 
-
-import { OpHubDashboard, OrderPageElem } from '../../components'
-
-import { NewOrder } from '../../components';
+import { OpHubDashboard, OrderPageElem, NewOrder } from '../../components'
 import { LocalGroceryStore, LocalShipping, Favorite } from '@mui/icons-material'
 import { Box, Button, Typography } from '@mui/material';
 
@@ -38,6 +35,10 @@ const OrderDetail = () => {
       
     })()
   }, [])
+
+  // const startNewOrder = () => {
+  //   setNewOrder(true)
+  // }
 
   return (
 
