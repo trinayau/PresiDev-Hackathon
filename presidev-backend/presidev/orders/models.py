@@ -62,6 +62,7 @@ class Organisation(models.Model):
     organisation_type = models.ForeignKey(OrganisationType, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     organisation_items = models.ManyToManyField(Item, through="OrganisationItem")
+    linked_organisations = models.ManyToManyField('self', blank=True)
 
     def __str__(self):
        return self.name
@@ -89,7 +90,8 @@ class Order(models.Model):
     description = models.CharField(max_length=256, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Organisation, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='owner')
+    operational_hub = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='operational_hub', null=True, blank=True)
     items = models.ManyToManyField(Item, through="OrderItems")
 
     def __str__(self):
