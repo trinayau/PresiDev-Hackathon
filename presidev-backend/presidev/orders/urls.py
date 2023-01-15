@@ -9,7 +9,7 @@ router.register('item', views.ItemViewSet)
 router.register('category', views.CategoryViewSet)
 router.register('singlecategory', views.SingleCategoryViewSet)
 router.register('itemcategory', views.ItemCategoryViewSet)
-
+router.register('favitem', views.FavItemViewSet)
 urlpatterns = [
     path('', include(router.urls)),
 ]
