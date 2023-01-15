@@ -3,20 +3,21 @@ import { useEffect, useState, useContext } from 'react';
 import { API_ENDPOINT } from '../../settings'
 import AuthContext from '../../context/AuthContext';
 import ClipLoader from "react-spinners/ClipLoader";
-import { OrderPageElem } from '../../components'
+import { OrderPageElem, NewOrder } from '../../components';
+import { LocalGroceryStore, LocalShipping, Favorite } from '@mui/icons-material'
+import { Box, Button, Typography } from '@mui/material';
 
 const OrderDetail = () => {
 
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
+  const [newOrder, setNewOrder] = useState(false)
   let { authTokens } = useContext(AuthContext);
 
   const override = {
     display: "block",
     margin: "0 auto",
   };
-
-
 
   useEffect(() => {
     (async () => {
@@ -34,54 +35,72 @@ const OrderDetail = () => {
     })()
   }, [])
 
+  const startNewOrder = () => {
+    setNewOrder(true)
+  }
+
   return (
-    <div className="order-detail">
-      <h1>Orders</h1>
-      {loading ? <ClipLoader
-        size={40}
-        cssOverride={override}
-        color={"#057465"}
-        loading={loading}
-        speedMultiplier={1.5}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      /> : orders.map((order) => {
-        return (
-          <>
-            <div class="d-flex my-4 flex-wrap order-stats">
-              <div class="box me-4 my-1 bg-light">
-                <img className="img-fluid" src="https://www.freepnglogos.com/uploads/box-png/cardboard-box-brown-vector-graphic-pixabay-2.png"
-                  alt="box" />
-                <div class="d-flex align-items-center mt-2">
-                  <div class="tag">Orders placed</div>
-                  <div class="ms-auto number">{orders.length}</div>
+
+    !newOrder ?
+      <div className="order-detail">
+        <Box
+          sx={{
+            minWidth: 500,
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          <Typography variant='h4' >Orders</Typography>
+          <Button
+            variant='outlined'
+            onClick={() => startNewOrder()}
+          >Start New Order</Button>
+        </Box>
+        {loading ? <ClipLoader
+          size={40}
+          cssOverride={override}
+          color={"#057465"}
+          loading={loading}
+          speedMultiplier={1.5}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> : orders.map((order) => {
+          return (
+            <>
+              <div class="d-flex my-4 flex-wrap order-stats">
+                <div class="box me-4 my-1 bg-light">
+                  <LocalShipping fontSize='large' />
+                  <div class="d-flex align-items-center mt-2">
+                    <div class="tag">Orders placed</div>
+                    <div class="ms-auto number">{orders.length}</div>
+                  </div>
+                </div>
+                <div class="box me-4 my-1 bg-light">
+                  <LocalGroceryStore fontSize='large' />
+                  <div class="d-flex align-items-center mt-2">
+                    <div class="tag">Items in Cart</div>
+                    <div class="ms-auto number">10</div>
+                  </div>
+                </div>
+                <div class="box me-4 my-1 bg-light">
+                  <Favorite fontSize='large' style={{ color: 'red', opacity: 0.8 }} />
+                  <div class="d-flex align-items-center mt-2">
+                    <div class="tag">Favourites</div>
+                    <div class="ms-auto number">10</div>
+                  </div>
                 </div>
               </div>
-              <div class="box me-4 my-1 bg-light">
-                <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-campus-recreation-university-nebraska-lincoln-30.png"
-                  alt="cart" />
-                <div class="d-flex align-items-center mt-2">
-                  <div class="tag">Items in Cart</div>
-                  <div class="ms-auto number">10</div>
-                </div>
-              </div>
-              <div class="box me-4 my-1 bg-light">
-                <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png"
-                  alt="heart" />
-                <div class="d-flex align-items-center mt-2">
-                  <div class="tag">Favourites</div>
-                  <div class="ms-auto number">10</div>
-                </div>
-              </div>
-            </div>
 
 
 
-            <OrderPageElem order={order} />
+              <OrderPageElem order={order} />
 
-          </>)
-      })}
-    </div>
+            </>
+          )
+        })}
+      </div>
+      :
+      <NewOrder />
   );
 }
 
