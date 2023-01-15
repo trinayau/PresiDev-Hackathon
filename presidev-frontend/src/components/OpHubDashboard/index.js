@@ -1,10 +1,8 @@
-import { Box, Button, Checkbox } from '@mui/material';
+import { Box, Button, LinearProgress } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 
-const OpHubDashboard = ({orders}) => {
-
-    useEffect(() => console.log(orders), [])
+const OpHubDashboard = ({orders, loading}) => {
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 200 },
@@ -24,6 +22,10 @@ const OpHubDashboard = ({orders}) => {
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                loading={loading}
+                components={{
+                    LoadingOverlay: LinearProgress,
+                }}
             />
         </div>
     )

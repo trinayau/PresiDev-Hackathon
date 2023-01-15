@@ -45,7 +45,7 @@ const CategoryCardMUI = ({
   };
 
   return (
-    <Card sx={{ minWidth: "300px", maxWidth: 300 }}>
+    <Card sx={{ minWidth: "300px", maxWidth: 300, margin: 5 }}>
       <Snackbar
         open={open}
         autoHideDuration={2000}
