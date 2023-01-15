@@ -49,7 +49,7 @@ class Item(models.Model):
     image_url = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     categories = models.ManyToManyField(Category)
-    url = models.CharField(max_length=256, null=True)
+    url = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):
        return self.name
@@ -109,4 +109,20 @@ class ItemPricing(models.Model):
     cost = models.FloatField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
+class FavItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
+    @property
+    def img_url(self):
+        category = self.item.categories.first()
+        print(category, category.img_url)
+        if category:
+            return category.img_url
+        return self.item.image_url
+
+
+    def __str__(self):
+         return self.user.username + ' - ' + self.item.name
+
+    

@@ -1,8 +1,10 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-from .models import UserExtended, Order, Item, Category, Organisation
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer
+from .models import UserExtended, Order, Item, Category, Organisation, FavItem
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -98,3 +100,44 @@ class ItemCategoryViewSet(viewsets.ModelViewSet):
         if category_id is not None:
             return queryset.filter(categories__id=category_id)
         return queryset
+
+class FavItemViewSet(viewsets.ModelViewSet):
+    queryset = FavItem.objects.all()
+    serializer_class = FavItemSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get", "post", "delete"]
+
+    def get_queryset(self):
+        queryset = FavItem.objects.all()
+        user = self.request.user
+        if user.id is not None:
+            return queryset.filter(user__id=user.id)
+        return queryset
+    
+    def create(self, request, *args, **kwargs):
+        user = self.request.user
+        item_id = self.request.data.get("item")
+        print(item_id, "item id!!!!")
+        item = Item.objects.get(id=item_id)
+        # check if item is already favourited by self.request.user:
+        if FavItem.objects.filter(user=user, item=item).exists():
+            return Response({"message": "Item already favourited!"})
+        else: 
+            fav_item = FavItem.objects.create(user=user, item=item)
+            fav_item.save()
+            return Response({"message": "Item Favourited!"})
+
+    def destroy(self, request, *args, **kwargs):
+        user = self.request.user
+        # get item id from url:
+        item_id = self.kwargs["pk"]
+        print(item_id, "item id!!!!")
+        item = Item.objects.get(id=item_id)
+        # check if item is already favourited by self.request.user:
+        if FavItem.objects.filter(user=user, item=item).exists():
+            fav_item = FavItem.objects.get(user=user, item=item)
+            fav_item.delete()
+            return Response({"message": "Item Unfavourited!"})
+        else:
+            return Response({"message": "Error, item not favourited!"})
+
