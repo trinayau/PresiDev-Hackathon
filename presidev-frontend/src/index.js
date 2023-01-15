@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import {AuthProvider} from './context/AuthContext';
 import { SnackbarProvider } from 'notistack'
+import {CartProvider} from './context/Context';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     vertical: 'top',
     horizontal: 'center',}}>
       <AuthProvider>
+        <CartProvider>
         <App />
+        </CartProvider>
       </AuthProvider>
     </SnackbarProvider>
   </Router>

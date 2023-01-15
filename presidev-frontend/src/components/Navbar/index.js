@@ -221,7 +221,11 @@ const Navbar = () => {
                   Contact
                 </Button>
               </NavHashLink>
-              <Button
+  
+
+              {user ? (
+                <>
+                  <Button
                   key={'categories'}
                   onClick={() => handleLink('/categories')}
                   sx={{
@@ -234,8 +238,22 @@ const Navbar = () => {
                 >
                   Categories
                 </Button>
-
-              {user ? (
+                 <Button
+                  key={'cart'}
+                  onClick={() => handleLink('/cart')}
+                  sx={{
+                    my: 2,
+                    color: 'rgba(255, 255, 255, 0.6);',
+                    display: 'block',
+                    "&:hover": {
+                      color: '#52796f',
+                      textDecoration: 'none',
+                      transition: 'all 0.2s ease-in'
+                    }
+                  }}
+                >
+                  Cart
+                </Button>
                 <Button
                   key={'logout'}
                   onClick={() => logoutuser()}
@@ -249,6 +267,7 @@ const Navbar = () => {
                 >
                   Logout
                 </Button>
+                </>
               ) : (
                 <>
                   <NavHashLink to="/login" smooth>
