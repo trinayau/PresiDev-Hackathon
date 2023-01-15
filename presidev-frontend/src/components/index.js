@@ -12,4 +12,5 @@ export {default as Supplier} from './Supplier';
 export {default as OpHubDashboard} from './OpHubDashboard';
 
 export {default as NewOrder} from './NewOrder';
+export {default as CartCard} from './CartCard';
 

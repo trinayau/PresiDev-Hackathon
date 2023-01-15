@@ -51,7 +51,7 @@ const SingleProductPage = ({ image, productDesc }) => {
           <div className="single-product-img">
             <img
               clas="image_fluid"
-              src={category.image_url}
+              src={category.img_url}
               alt={image}
               style={{ maxHeight: "200px", borderRadius: 5 }}
             />
@@ -79,7 +79,9 @@ const SingleProductPage = ({ image, productDesc }) => {
           style={{ fontWeight: 600}}
         >
           <div>Item</div>
-          <div>Amount</div>
+          <div>Quantity</div>
+          <div>Add </div>
+          <div>Favourite</div>
         </div>
         {loading ? checkProductsExist(category) : <CircularProgress />}
       </div>

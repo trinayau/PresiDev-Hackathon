@@ -1,7 +1,7 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState, useContext } from 'react';
 import { CartContext } from '../../context/Context';
-import EnergySavingsLeafIcon from '@mui/icons-material/EnergySavingsLeaf';
+import { Favorite } from '@mui/icons-material';
 
 
 const Supplier = ({product}) => {
@@ -27,9 +27,6 @@ const Supplier = ({product}) => {
 
     return (<div className="supplier">
     <div className="supplier-name">{product.name}</div>
-    <div className="product-price">£{twoDecPlace(product.price)}</div>
-    {/* <div className="offset-price">£{twoDecPlace(supplier.offset)}</div> */}
-    <div className="total-price">£{twoDecPlace(product.total)}</div>
     <div className="add-cart">
         {/* input for number of items */}
         <input type="number" min="1" max="90" value={quantity} onChange={(e) => setQuantity(e.target.value)}className="quantity" style={{textAlign: 'center'}}/>
@@ -43,6 +40,19 @@ const Supplier = ({product}) => {
             cursor: "pointer"
         }
     }}/>
+    </div>
+    <div className="favourite">
+    <Favorite
+    sx={{
+        ":hover": {
+            color: "#52796f",
+            cursor: "pointer"
+        }
+    }}
+    onClick={() => console.log("favourite", product.id)}
+    />
+    
+
     </div>
 </div> );
 }
