@@ -7,7 +7,7 @@ PresiDev is an end-to-end prototype platform that aims to help Presidium Network
 ### 1.2. Team Members
 | Name      | Current Role                                                        | Team Role                |
 |-----------|---------------------------------------------------------------------|--------------------------|
-| Paul Martin  | Front-End Developer at  | Full-Stack Web Development       |
+| Paul Martin  | Software Engineer at Little Dot Studios  | Full-Stack Web Development       |
 | Trina Yau | Salesforce Software Engineer at Ford Motor Company                     | Full-Stack Web Development               |
 
 ### 1.3. Problem Statement
