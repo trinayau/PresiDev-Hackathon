@@ -3,7 +3,13 @@ import { useEffect, useState, useContext } from 'react';
 import { API_ENDPOINT } from '../../settings'
 import AuthContext from '../../context/AuthContext';
 import ClipLoader from "react-spinners/ClipLoader";
+
 import { OpHubDashboard, OrderPageElem } from '../../components'
+
+import { OrderPageElem, NewOrder } from '../../components';
+import { LocalGroceryStore, LocalShipping, Favorite } from '@mui/icons-material'
+import { Box, Button, Typography } from '@mui/material';
+
 
 const OrderDetail = () => {
 
@@ -11,12 +17,11 @@ const OrderDetail = () => {
   const [loading, setLoading] = useState(true)
   let { authTokens, user } = useContext(AuthContext);
 
+
   const override = {
     display: "block",
     margin: "0 auto",
   };
-
-
 
   useEffect(() => {
     (async () => {
@@ -33,12 +38,17 @@ const OrderDetail = () => {
     })()
   }, [])
 
+  const startNewOrder = () => {
+    setNewOrder(true)
+  }
+
   return (
 
       user?.profile?.organisation?.organisation_type?.name === "End User" ?
 
       <div className="order-detail">
         <h1>Orders</h1>
+
         {loading ? <ClipLoader
           size={40}
           cssOverride={override}
@@ -52,24 +62,25 @@ const OrderDetail = () => {
             <>
               <div class="d-flex my-4 flex-wrap order-stats">
                 <div class="box me-4 my-1 bg-light">
-                  <img className="img-fluid" src="https://www.freepnglogos.com/uploads/box-png/cardboard-box-brown-vector-graphic-pixabay-2.png"
-                    alt="box" />
+
+                  <LocalShipping fontSize='large' />
+
                   <div class="d-flex align-items-center mt-2">
                     <div class="tag">Orders placed</div>
                     <div class="ms-auto number">{orders.length}</div>
                   </div>
                 </div>
                 <div class="box me-4 my-1 bg-light">
-                  <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-campus-recreation-university-nebraska-lincoln-30.png"
-                    alt="cart" />
+
+                  <LocalGroceryStore fontSize='large' />
                   <div class="d-flex align-items-center mt-2">
                     <div class="tag">Items in Cart</div>
                     <div class="ms-auto number">10</div>
                   </div>
                 </div>
                 <div class="box me-4 my-1 bg-light">
-                  <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png"
-                    alt="heart" />
+
+                  <Favorite fontSize='large' style={{ color: 'red', opacity: 0.8 }} />
                   <div class="d-flex align-items-center mt-2">
                     <div class="tag">Favourites</div>
                     <div class="ms-auto number">10</div>
@@ -92,6 +103,7 @@ const OrderDetail = () => {
     : 
     
     <p>Incomplete User Profile or unknown org type</p>
+
   );
 }
 
