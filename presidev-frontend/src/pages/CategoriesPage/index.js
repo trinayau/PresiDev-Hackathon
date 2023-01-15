@@ -5,7 +5,7 @@ import { Box, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import { API_ENDPOINT } from '../../settings';
 import AuthContext from '../../context/AuthContext';
-// import { CartContext } from '../../context/Context';
+import { CartContext } from '../../context/Context';
 import { useContext } from 'react';
 
 const AllProductPage = () => {
@@ -15,8 +15,8 @@ const AllProductPage = () => {
   const [loading, setLoading] = useState(false);
   let { authTokens } = useContext(AuthContext);
 
-//   const Globalstate = useContext(CartContext);
-//   const dispatch = Globalstate.info.dispatch;
+  const Globalstate = useContext(CartContext);
+  const dispatch = Globalstate.info.dispatch;
 
   useEffect(() =>{ 
     async function searchApi() {
@@ -38,24 +38,6 @@ const AllProductPage = () => {
           <p className="product-heading h1 pt-3">Categories</p>
           </div>
           <SearchBar/>  
-      {/* <section className="latest-products">
-        {loading ? latestProducts.map((product) => {
-          return (
-            <ProductCardMUI
-              key={product.id}
-              name={product.name}
-              price={product.price}
-              image={product.img_url}
-              offset={product.offset}
-              id={product.id}
-            //   dispatch={dispatch}
-              product={product}
-   
-            />
-          );
-        }) : <CircularProgress sx={{color: '#52796f', textAlign:'center'}}/>}
-
-      </section> */}
 
       <Box sx={{flexDirection: 'row', display: 'flex', flexWrap: 'wrap'}}>
 
@@ -67,7 +49,7 @@ const AllProductPage = () => {
               catImage={category.img_url}
               catId={category.id}
               catDesc = {category.description}
-            //   dispatch={dispatch}
+              dispatch={dispatch}
               product={category.cheapest_product}
 
             />

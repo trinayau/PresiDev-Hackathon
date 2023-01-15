@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 
 const nav = ['account', 'orders', 'favourites', 'categories', 'products', 'cart']
+const opUserNav = ['account', 'dashboard']
 
 const Sidebar = () =>
     <Box

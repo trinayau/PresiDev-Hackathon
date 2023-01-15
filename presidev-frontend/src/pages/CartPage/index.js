@@ -25,6 +25,12 @@ const CartPage = () => {
     return parseFloat(totalEmissions.toFixed(2));
   }, 0);
 
+  const totalQuantity = state.reduce((total, item) => {
+    const totalQuantity = total + item.quantity;
+    return totalQuantity;
+  }, 0);
+
+
   const navigate = useNavigate();
 
   const handleLink = (link) => {
@@ -57,21 +63,24 @@ const CartPage = () => {
   
   return (
     <>
-      <SearchBar Heading="Your Shopping Cart" />
+      <p className="product-heading h1 pt-3">Shopping Cart</p>
+      {state.length > 0 ?
+      <>
       <div class="cart">
-
-        {state.map((cartItem) => (
-          <CartCard id={ cartItem.id } cartItem={cartItem.product} itemQuantity={cartItem.quantity} cartTotal={cartTotal} setCartTotal={setCartTotal} dispatch={dispatch}/>
+         {state.map((cartItem) => (
+          <CartCard id={ cartItem.id } key={cartItem.id} cartItem={cartItem.product} itemQuantity={cartItem.quantity} cartTotal={cartTotal} setCartTotal={setCartTotal} dispatch={dispatch}/>
         ))}
       </div>
-      {state.length > 0 && <div class="cart-page-footer">
-        <div class="cart-page-footer-total">
-           <div className="total"><p>Total: £{total}</p></div>
-            <div className="total"><p>Total Emissions Offset: {totalEmissions}kg</p></div>
-        </div>
-        <div class="cart-page-footer-checkout">
+      <div class="cart-page-footer">
+   
+        <div className="cart-page-footer-checkout d-flex justify-content-evenly">
+          <p>Total Quantity: {state && totalQuantity}</p>
         <Button variant="contained" onClick={() => handleCheckout()} sx={{backgroundColor:'#354F52', my:'5px'}}>Checkout</Button>
         </div>
+      </div>
+      </> : <div className="cart-page-empty text-center">
+        <h2 className="product-heading pt-3">Your cart is empty</h2>
+        <Button variant="contained" onClick={() => handleLink('/categories')} sx={{backgroundColor:'#354F52', my:'5px'}}>Continue Shopping</Button>
       </div>}
     </>
   );

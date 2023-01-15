@@ -26,7 +26,6 @@ const SingleProductPage = ({ image, productDesc }) => {
         
         // get products
         const result = await axios.get(`${API_ENDPOINT}/orders/itemcategory/?category_id=${id}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
-        console.log(result.data)
         setProducts(result.data);
         setLoading(true);
       } catch (err) {

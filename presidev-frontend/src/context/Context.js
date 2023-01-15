@@ -9,6 +9,7 @@ export const CartProvider = (props) => {
           (item) => action.payload.product.id === item.product.id
         );
         if (tempstate.length > 0) {
+          console.log(state)
           return state;
         } else {
           return [...state, action.payload];

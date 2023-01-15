@@ -62,22 +62,17 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
       <div>
         <img
           class="cart-img"
-          src={`${cartItem.image}`}
+          src={`${cartItem.image_url}`}
           alt={`${cartItem.name}`}
         />
       </div>
       <div class="cart-info">
         <div class="cart-item-name">
             {cartItem.name}</div>
-            <div cart-item-supplier>Supplier: {cartItem.supplier}</div>
+            <div cart-item-supplier>Desc: {cartItem.description}</div>
 
         <div className="cart-item-info">
-          <div class="cart-item-details">
-            Carbon offset: £{formatNumber(totalOffset)}
-          </div>
-          <div class="cart-item-details">
-            Total Price: £{formatNumber(totalPrice)}
-          </div>
+          
           <div class="cart-item-details">
             <span className="quantity-changers" onClick={minus} style={{cursor: 'pointer'}}>
               -

@@ -78,11 +78,9 @@ const Supplier = ({product}) => {
 
     // cart function
     const addToCart = () => {
-        // send quantity and id to cart through context
-        // add supplier and quantity to a product object
-        
+        console.log('add to cart')
         dispatch({ type: "ADD_TO_CART", payload: { product, quantity: 1 } });
-        // add toast
+
     }
 
 
@@ -106,7 +104,7 @@ const Supplier = ({product}) => {
    </div>
     <div className="add-cart">
     <ShoppingCartIcon 
-    // onClick={addToCart} 
+    onClick={addToCart} 
     sx={{
         ":hover": {
             color: "#52796f",

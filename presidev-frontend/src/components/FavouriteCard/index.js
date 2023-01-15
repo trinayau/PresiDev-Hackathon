@@ -49,7 +49,6 @@ const FavouriteCard = ({
     const unFavourite = async () => {
         const favId= favourite.item.id
         const response = await axios.delete(`${API_ENDPOINT}/orders/favitem/${favId}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } });
-    console.log(response.data);
     setMessage(response.data.message);
     setState({ vertical: "top", horizontal: "center", open: true });
     removeFavourite(favourite.id);
