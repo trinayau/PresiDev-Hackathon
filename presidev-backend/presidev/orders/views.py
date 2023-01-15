@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import UserExtended, Order, Item, Category
+from .models import UserExtended, Order, Item, Category, Organisation
 from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer
 
 
@@ -21,28 +21,6 @@ class UserViewSet(viewsets.ModelViewSet):
             return queryset.filter(user_type__name=user_type)
         return queryset
 
-class SingleUserViewSet(viewsets.ModelViewSet):
-    queryset = UserExtended.objects.all()
-    serializer_class = UserExtendedSerializer
-    permission_classes = [IsAuthenticated]
-    http_method_names = ["get"]
-
-    def get_queryset(self):
-
-        queryset = UserExtended.objects.all()
-        user_id = self.request.query_params.get("user_id")
-        # for some reason, the user_id in the jWT is the email
-        if user_id is not None:
-            return queryset.filter(email=user_id)
-        return queryset
-
-    def get_queryset(self):
-
-        queryset = UserExtended.objects.all()
-        user_id = self.request.query_params.get("user_id")
-        if user_id is not None:
-            return queryset.filter(id=user_id)
-        return queryset
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -55,17 +33,28 @@ class OrderViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
+        
+        # get user org type
+        user = self.request.user
+        profile = UserExtended.objects.get(user__id=user.id)
 
-        queryset = Order.objects.all()
-        order_id = self.request.query_params.get("order_id")
-        organisation_id = self.request.query_params.get("organisation_id")
+        queryset_all = Order.objects.all()
 
-        if order_id is not None:
-            return queryset.filter(id=order_id)
-        elif organisation_id is not None:
-            return queryset.filter(organisation__id=organisation_id)
 
-        return queryset
+        # if end user...
+        if (profile.organisation.organisation_type.name == "End User"):
+            # filter only orders associated with the users organisation
+            queryset = queryset_all.filter(owner=profile.organisation.id)
+            return queryset
+
+        # if operational hub...
+        elif (profile.organisation.organisation_type.name == "Operational Hub"):
+            # list of linked organisations
+            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            # list of orders from linked organisations
+            queryset = queryset_all.filter(owner__in=linked_orgnaisations)
+            return queryset
+
 
 
 class ItemViewSet(viewsets.ModelViewSet):
