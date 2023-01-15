@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { SearchBar, Supplier } from "../../components";
+import { SearchBar, Supplier, BackButton } from "../../components";
 import "./index.css";
 import BrokenImageIcon from "@mui/icons-material/BrokenImage";
 import { CircularProgress } from "@mui/material";
@@ -11,17 +11,23 @@ import { useContext } from 'react';
 
 const SingleProductPage = ({ image, productDesc }) => {
   const [category, setCategory] = useState({});
+  const [products, setProducts] = useState({});
   const [loading, setLoading] = useState(false);
   let { authTokens } = useContext(AuthContext);
+
   const { id, name } = useParams();
 
   useEffect(() => {
     async function searchApi() {
      
       try {
+        const categoryResult = await axios.get(`${API_ENDPOINT}/orders/singlecategory/${id}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
+        setCategory(categoryResult.data);
+        
+        // get products
         const result = await axios.get(`${API_ENDPOINT}/orders/itemcategory/?category_id=${id}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
         console.log(result.data)
-        setCategory(result.data);
+        setProducts(result.data);
         setLoading(true);
       } catch (err) {
         console.error(err);
@@ -30,21 +36,22 @@ const SingleProductPage = ({ image, productDesc }) => {
     searchApi();
   }, [id]);
 
-  const checkProductsExist = (category) => {
-    if (category.length > 0) {
+  const checkProductsExist = (products) => {
+    if (products.length > 0) {
         
-      return(category.map((product, index) => {
+      return(products.map((product, index) => {
         return <Supplier key={product.id} product={product} />;
       }))
     } else {
         document.querySelector(".supplier-list-heading").style.display = "none";
-      return <div className="no-products">No products found, sorry! Please check back again later for new {category.name} products.</div>;
+      return <div className="no-products">No products found, sorry! Please check back again later for new {name} products.</div>;
     }
   };
 
   return (
     <span className="single-product-page">
       <SearchBar Heading="Products" />
+      <BackButton />
  
       <div className="single-product-section">
         {loading ? (
@@ -83,7 +90,7 @@ const SingleProductPage = ({ image, productDesc }) => {
           <div>Add </div>
           <div>Favourite</div>
         </div>
-        {loading ? checkProductsExist(category) : <CircularProgress />}
+        {loading ? checkProductsExist(products) : <CircularProgress />}
       </div>
     </span>
   );
