@@ -1,7 +1,7 @@
 import { useEffect, useState} from 'react';
 import "./index.css";
 import { ProductCardMUI, CategoryCardMUI, SearchBar } from "../../components";
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import { API_ENDPOINT } from '../../settings';
 import AuthContext from '../../context/AuthContext';
@@ -57,7 +57,7 @@ const AllProductPage = () => {
 
       </section> */}
 
-      <section>
+      <Box sx={{flexDirection: 'row', display: 'flex', flexWrap: 'wrap'}}>
 
         {loading ? categories.map((category) => {
           return (
@@ -76,7 +76,7 @@ const AllProductPage = () => {
 
       
     
-      </section>
+      </Box>
     </div>
   );
 };

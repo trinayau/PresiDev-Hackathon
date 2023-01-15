@@ -5,3 +5,4 @@ export {default as CategoriesPage} from './CategoriesPage';
 export {default as NotFoundPage} from './NotFoundPage';
 export {default as SingleProductPage} from './SingleProductPage';
 export {default as CartPage} from './CartPage';
+export {default as MenuPage} from './MenuPage';

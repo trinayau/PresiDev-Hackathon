@@ -129,11 +129,11 @@ const Navbar = () => {
                     <Typography textAlign="center">Contact</Typography>
                   </MenuItem>
                 </NavHashLink>
-                <NavHashLink to="/categories" onClick={handleCloseNavMenu}>
+                {/* <NavHashLink to="/categories" onClick={handleCloseNavMenu}>
                   <MenuItem key={'Categories'}>
                     <Typography textAlign="center">Categories</Typography>
                   </MenuItem>
-                </NavHashLink>
+                </NavHashLink> */}
                 {
                   user ? (
                     <MenuItem
@@ -225,7 +225,7 @@ const Navbar = () => {
 
               {user ? (
                 <>
-                  <Button
+                  {/* <Button
                   key={'categories'}
                   onClick={() => handleLink('/categories')}
                   sx={{
@@ -253,7 +253,7 @@ const Navbar = () => {
                   }}
                 >
                   Cart
-                </Button>
+                </Button> */}
                 <Button
                   key={'logout'}
                   onClick={() => logoutuser()}
