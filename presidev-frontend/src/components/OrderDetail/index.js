@@ -96,7 +96,7 @@ const OrderDetail = () => {
 
     : user?.profile?.organisation?.organisation_type?.name === "Operational Hub" ?
 
-    <OpHubDashboard orders={orders} />
+    <OpHubDashboard orders={orders} loading={loading} />
 
     : 
     
