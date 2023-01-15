@@ -1,33 +1,36 @@
 import { useState, useEffect } from 'react';
 
 const OrderPageElem = ({ order }) => {
-    const [orderStatus, setOrderStatus] = useState(order.status.name.toLowerCase())
+    // const [orderStatus, setOrderStatus] = useState()
 
     // add .green to step depending on order status:
     useEffect(() => {
-        
+        const orderStatus = order.status.name.toLowerCase();
+
+        // find the container with the id of order.id and add green to the step with the id of step-1:
+        const orderContainer = document.getElementById(order.id)
         if (orderStatus === "placed") {
-            document.getElementById("step-1").classList.add("green")
+            orderContainer.querySelector(`#step-1`).classList.add("green")
         } else if (orderStatus === "accepted") {
-            document.getElementById("step-1").classList.add("green")
-            document.getElementById("step-2").classList.add("green")
+            orderContainer.querySelector(`#step-1`).classList.add("green")
+            orderContainer.querySelector(`#step-2`).classList.add("green")
         } else if (orderStatus === "packed") {
-            document.getElementById("step-1").classList.add("green")
-            document.getElementById("step-2").classList.add("green")
-            document.getElementById("step-3").classList.add("green")
+            orderContainer.querySelector(`#step-1`).classList.add("green")
+            orderContainer.querySelector(`#step-2`).classList.add("green")
+            orderContainer.querySelector(`#step-3`).classList.add("green")
         } else if (orderStatus === "shipped") {
             document.getElementById("step-1").classList.add("green")
             document.getElementById("step-2").classList.add("green")
             document.getElementById("step-3").classList.add("green")
             document.getElementById("step-4").classList.add("green")
         } else if (orderStatus === "delivered") {
-            document.getElementById("step-1").classList.add("green")
-            document.getElementById("step-2").classList.add("green")
-            document.getElementById("step-3").classList.add("green")
-            document.getElementById("step-4").classList.add("green")
-            document.getElementById("step-5").classList.add("green")
+            orderContainer.querySelector(`#step-1`).classList.add("green")
+            orderContainer.querySelector(`#step-2`).classList.add("green")
+            orderContainer.querySelector(`#step-3`).classList.add("green")
+            orderContainer.querySelector(`#step-4`).classList.add("green")
+            orderContainer.querySelector(`#step-5`).classList.add("green")
         }
-    }, [orderStatus])
+    }, [order])
 
     const parseDate = (date) => {
         const orderDate = new Date(date)
@@ -38,7 +41,7 @@ const OrderPageElem = ({ order }) => {
     }
 
     return (
-        <div className="orderpage-elem container order my-2">
+        <div className="orderpage-elem container order my-2" id={order.id}>
             <div className="orderpage-elem__item d-flex row">
                 <div className="orderpage-elem__item-info ">
                     <div className="row">

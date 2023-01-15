@@ -12,6 +12,7 @@ import { Box, Button, Typography } from '@mui/material';
 const OrderDetail = () => {
 
   const [orders, setOrders] = useState([])
+  const [favs, setFavs] = useState([])
   const [loading, setLoading] = useState(true)
   let { authTokens, user } = useContext(AuthContext);
 
@@ -25,8 +26,11 @@ const OrderDetail = () => {
     (async () => {
       try {
         const response = await axios.get(`${API_ENDPOINT}/orders/order`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
-        if (response.status === 200) {
-          setOrders(response.data)
+        const responseFavs = await axios.get(`${API_ENDPOINT}/orders/favitem/`, { headers
+        : { Authorization: `Bearer ${authTokens.access}` } })
+        if (response.status === 200 && responseFavs.status === 200) {
+          setOrders(response.data.reverse())
+          setFavs(responseFavs.data.length)
           setLoading(false)
         }
       } catch (err) {
@@ -36,9 +40,7 @@ const OrderDetail = () => {
     })()
   }, [])
 
-  // const startNewOrder = () => {
-  //   setNewOrder(true)
-  // }
+
 
   return (
 
@@ -69,7 +71,7 @@ const OrderDetail = () => {
                   <Favorite fontSize='large' style={{ color: 'red', opacity: 0.8 }} />
                   <div class="d-flex align-items-center mt-2">
                     <div class="tag">Favourites</div>
-                    <div class="ms-auto number">10</div>
+                    <div class="ms-auto number">{favs!==[] && favs}</div>
                   </div>
                 </div>
               </div>
@@ -84,10 +86,7 @@ const OrderDetail = () => {
         /> : orders.map((order) => {
           return (
             <>
-              
-
-
-
+          
               <OrderPageElem order={order} />
 
             </>)
