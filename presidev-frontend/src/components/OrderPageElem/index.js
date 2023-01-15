@@ -38,7 +38,7 @@ const OrderPageElem = ({ order }) => {
     }
 
     return (
-        <div className="orderpage-elem container order">
+        <div className="orderpage-elem container order my-2">
             <div className="orderpage-elem__item d-flex row">
                 <div className="orderpage-elem__item-info ">
                     <div className="row">

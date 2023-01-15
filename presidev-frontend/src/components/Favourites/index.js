@@ -38,12 +38,7 @@ const Favourites = () => {
         setState({ vertical: "top", horizontal: "center", open: false });
       };
 
-    // remove favourite from favourites list
     const removeFavourite = async (id) => {
-        const response = await axios.delete(`${API_ENDPOINT}/orders/favitem/${id}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } });
-        console.log(response.data)
-        setMessage(response.data.message)
-        setState({open: true, vertical: 'top', horizontal: 'center'})
         setFavourites(favourites.filter((favourite) => favourite.id !== id));
     }
 
@@ -54,9 +49,9 @@ const Favourites = () => {
     <div className="favourites-heading h1">Favourites</div>
 
     <div className="favourites-list">
-        {favourites.map((favourite) => (
+        {favourites ? favourites.map((favourite) => (
             <FavouriteCard key={favourite.id} favourite={favourite} removeFavourite={removeFavourite} />
-        ))}
+        )): <div className="h3">No favourites yet</div>}
   </div>
     </div> );
 }

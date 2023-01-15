@@ -65,8 +65,8 @@ const Supplier = ({product}) => {
             if (fav.item.id === product.id) {
               setCheck(true)
             }
-            setFavCheck(true)
           })
+          setFavCheck(true)
         }
         getFav()
       }, [])

@@ -1,7 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 import {default as Layout} from '../layouts';
-import { HomePage, LoginPage, AccountPage, CategoriesPage, SingleProductPage, MenuPage, CartPage } from '../pages';
-import { OrderDetail, Sidebar } from '../components';
+import { HomePage, LoginPage, AccountPage, CategoriesPage, SingleProductPage, MenuPage, CartPage, } from '../pages';
+import { OrderDetail, Sidebar, Favourites } from '../components';
 import PrivateRoutes from './protectedRoutes';
 import { Box } from '@mui/material';
 
@@ -13,7 +13,7 @@ const Routing = () =>
             <Route element={<PrivateRoutes />} >
                 <Route path="/*" element={
                     <Box
-                        sx={{display: 'flex'}}
+                        sx={{display: 'flex', width: '100%!important'}}
                     >
                         <Sidebar />
                         <Box
@@ -23,6 +23,7 @@ const Routing = () =>
                                 <Route path="/account" element={<AccountPage />} />
                                 <Route path="/orders" element={<OrderDetail />} />
                                 <Route path="/categories" element={<CategoriesPage />} />
+                                <Route path="/favourites" element={<Favourites />} />
                                 <Route path="/products/:id/:name" element={<SingleProductPage />} />
                                 <Route path="/cart" element={<CartPage />} />
                             </Routes>

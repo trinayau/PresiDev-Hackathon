@@ -15,8 +15,8 @@ import { useContext } from "react";
 
 const FavouriteCard = ({
     favourite,
-    removeFavourite,
     dispatch,
+    removeFavourite,
 }) => {
   const navigate = useNavigate();
 
@@ -47,12 +47,14 @@ const FavouriteCard = ({
   };
 
     const unFavourite = async () => {
-        const response = await axios.delete(`${API_ENDPOINT}/orders/favitem/${favourite.id}/`, { headers
-            : { Authorization: `Bearer ${authTokens.access}` } })
+        const favId= favourite.item.id
+        const response = await axios.delete(`${API_ENDPOINT}/orders/favitem/${favId}/`, { headers: { Authorization: `Bearer ${authTokens.access}` } });
     console.log(response.data);
     setMessage(response.data.message);
     setState({ vertical: "top", horizontal: "center", open: true });
     removeFavourite(favourite.id);
+    return
+    
     
     };
 

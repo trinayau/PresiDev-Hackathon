@@ -46,19 +46,7 @@ const OrderDetail = () => {
 
       <div className="order-detail">
         <h1>Orders</h1>
-
-        {loading ? <ClipLoader
-          size={40}
-          cssOverride={override}
-          color={"#057465"}
-          loading={loading}
-          speedMultiplier={1.5}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        /> : orders.map((order) => {
-          return (
-            <>
-              <div class="d-flex my-4 flex-wrap order-stats">
+        <div class="d-flex my-4 flex-wrap order-stats">
                 <div class="box me-4 my-1 bg-light">
 
                   <LocalShipping fontSize='large' />
@@ -85,6 +73,18 @@ const OrderDetail = () => {
                   </div>
                 </div>
               </div>
+        {loading ? <ClipLoader
+          size={40}
+          cssOverride={override}
+          color={"#057465"}
+          loading={loading}
+          speedMultiplier={1.5}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> : orders.map((order) => {
+          return (
+            <>
+              
 
 
 

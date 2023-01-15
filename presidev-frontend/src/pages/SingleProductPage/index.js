@@ -49,7 +49,7 @@ const SingleProductPage = ({ image, productDesc }) => {
   };
 
   return (
-    <span className="single-product-page">
+    <span className="single-product-page" >
       <SearchBar Heading="Products" />
       <BackButton />
  
