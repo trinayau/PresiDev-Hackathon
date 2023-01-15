@@ -1,6 +1,6 @@
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
-import { Sidebar, OrderDetail, ProfileDetail, WishlistDetail } from "../../components";
+import { Sidebar, OrderDetail, ProfileDetail, Favourites } from "../../components";
 
 const AccountPage = () => {
   const { user } = useContext(AuthContext);
@@ -57,14 +57,15 @@ const AccountPage = () => {
         </div>
       </section>
       <section className="profile-content-container d-md-flex">
+        <div className="profile-left">
+
         <Sidebar profileClick={profileClick} ordersClick={ordersClick} wishlistClick={wishlistClick} />
+        </div>
         <div className="profile-right">
         {profile && <ProfileDetail />}
         {orders && <OrderDetail />}
-        {wishlist && <WishlistDetail />}
+        {wishlist && <Favourites />}
         </div>
-
-
       </section>
     </>
   );

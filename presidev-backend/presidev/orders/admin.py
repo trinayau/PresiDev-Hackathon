@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Organisation, ItemPricing, Location, Order, OrganisationType, User, UserType, Category, Item, Status, OrderItems, OrganisationItem, UserExtended
+from .models import Organisation, ItemPricing, Location, Order, OrganisationType, User, UserType, Category, Item, Status, OrderItems, OrganisationItem, UserExtended, FavItem
 
 # Register your models here.
 admin.site.register(Organisation)
@@ -14,3 +14,4 @@ admin.site.register(Status)
 admin.site.register(OrderItems)
 admin.site.register(OrganisationItem)
 admin.site.register(UserExtended)
+admin.site.register(FavItem)
