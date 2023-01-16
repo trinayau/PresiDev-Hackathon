@@ -116,7 +116,7 @@ class OrderViewSet(viewsets.ModelViewSet):
                     order_item = OrderItems.objects.create(order=order, item=item, quantity=custom_item["quantity"])
                     order_item.save()
         
-            return Response({"message": "Order created!"})
+            return Response({"message": "Order created!", "order": order.id})
         else:
             return Response({"message": "Only end users can create orders!"})
 class ItemViewSet(viewsets.ModelViewSet):

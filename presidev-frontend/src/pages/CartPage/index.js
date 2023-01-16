@@ -5,6 +5,10 @@ import { CartContext } from "../../context/Context";
 import AuthContext from "../../context/AuthContext";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_ENDPOINT } from "../../settings";
+import { CustomItemContext } from "../../context/CustomItemContext";
+
 const CartPage = () => {
 
   const [cartTotal, setCartTotal] = useState(0);
@@ -13,17 +17,13 @@ const CartPage = () => {
   const state = Globalstate.info.state;
   const dispatch = Globalstate.info.dispatch;
 
-  const { authTokens } = useContext(AuthContext);
-  
-  const total = state.reduce((total, item) => {
-    const totalPrice = total + item.product.total * item.quantity;
-    return parseFloat(totalPrice.toFixed(2));
-  }, 0);
+  const CustomItemState = useContext(CustomItemContext);
+  const customState = CustomItemState.info.state;
+  const CustomItemDispatch = CustomItemState.info.dispatch;
+  console.log(customState, "customState");
 
-  const totalEmissions = state.reduce((total, item) => {
-    const totalEmissions = total + item.product.offset * item.quantity;
-    return parseFloat(totalEmissions.toFixed(2));
-  }, 0);
+
+  const { authTokens } = useContext(AuthContext);
 
   const totalQuantity = state.reduce((total, item) => {
     const totalQuantity = total + item.quantity;
@@ -39,12 +39,26 @@ const CartPage = () => {
 
    const handleCheckout = async (e) => {
     // post cartitem with id and quantity to backend:
+
     const cartItems = state.map((item) => {
       return { id: item.product.id, quantity: item.quantity };
     });
 
-    const response = await fetch("http://127.0.0.1:8000/api/orders/create_order/", {
-      method: "POST",
+    let customItems = [];
+
+    if(customState.length > 0) {
+     customItems = customState.map((item) => {
+      // check if item.url is null and if so, set it to empty string
+      if (item.url === null) {
+        item.url = "";
+      }
+      return { name: item.name, description: item.description, url: item.url, quantity: item.quantity };
+    });
+  } else {
+     customItems = [];
+  }
+
+    const response = await axios.post(`${API_ENDPOINT}/orders/order/`, {items: cartItems, custom_items: customItems}, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${authTokens.access})}`
@@ -53,10 +67,12 @@ const CartPage = () => {
     });
 
     // get back order id
-    const data = await response.json();
-    console.log(data.id);
+    const data = await response.data;
+    console.log(data, "data");
     // redirect to checkout page with order id
-    handleLink(`/orderstatus/${data.id}`);
+    handleLink(`/orders/${data.order}`);
+    // empty cart
+    dispatch({ type: "CLEAR" });
    }
 
 
@@ -64,7 +80,7 @@ const CartPage = () => {
   return (
     <>
       <p className="product-heading h1 pt-3">Shopping Cart</p>
-      {state.length > 0 ?
+      {state && state.length > 0 ?
       <>
       <div class="cart">
          {state.map((cartItem) => (

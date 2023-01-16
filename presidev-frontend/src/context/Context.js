@@ -10,7 +10,6 @@ export const CartProvider = (props) => {
         );
 
         // if item is already in cart, increase quantity:
-
         if (tempstate.length > 0) {
           const tempstate = state.map((item) => {
             if (item.product.id === action.payload.product.id) {
@@ -50,6 +49,8 @@ export const CartProvider = (props) => {
         );
 
         return tempstate3;
+      case "CLEAR":
+        return [];
 
       default:
         return state;

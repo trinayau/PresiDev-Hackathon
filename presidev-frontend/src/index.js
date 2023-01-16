@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import {AuthProvider} from './context/AuthContext';
 import { SnackbarProvider } from 'notistack'
 import {CartProvider} from './context/Context';
+import { CustomItemProvider } from "./context/CustomItemContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +17,9 @@ root.render(
     horizontal: 'center',}}>
       <AuthProvider>
         <CartProvider>
+          <CustomItemProvider>
         <App />
+        </CustomItemProvider>
         </CartProvider>
       </AuthProvider>
     </SnackbarProvider>
