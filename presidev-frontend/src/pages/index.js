@@ -6,3 +6,4 @@ export {default as NotFoundPage} from './NotFoundPage';
 export {default as SingleProductPage} from './SingleProductPage';
 export {default as CartPage} from './CartPage';
 export {default as MenuPage} from './MenuPage';
+export {default as PreviousProductPage} from './PreviousProductPage';

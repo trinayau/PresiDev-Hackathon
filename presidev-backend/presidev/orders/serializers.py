@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserExtended, Order, Item, Category, FavItem
+from .models import UserExtended, Order, Item, Category, FavItem, OrderItems
 
 class UserExtendedSerializer(serializers.ModelSerializer):
 
@@ -32,5 +32,12 @@ class FavItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FavItem
+        fields = '__all__'
+        depth = 1
+
+class OrderItemsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderItems
         fields = '__all__'
         depth = 1

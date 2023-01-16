@@ -103,6 +103,9 @@ class OrderItems(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
 
+    def __str__(self):
+       return self.order.name + ' - ' + self.item.name
+
 
 class ItemPricing(models.Model):
     quantity = models.IntegerField()
@@ -125,4 +128,3 @@ class FavItem(models.Model):
     def __str__(self):
          return self.user.username + ' - ' + self.item.name
 
-    

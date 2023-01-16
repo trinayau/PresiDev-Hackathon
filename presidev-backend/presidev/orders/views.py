@@ -3,8 +3,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import UserExtended, Order, Item, Category, Organisation, FavItem
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer
+from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -141,3 +141,29 @@ class FavItemViewSet(viewsets.ModelViewSet):
         else:
             return Response({"message": "Error, item not favourited!"})
 
+
+# get all previously ordered items by user
+class UserOrderItemsViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
+
+    def get_queryset(self):
+        user = self.request.user
+        profile = UserExtended.objects.get(user__id=user.id)
+        queryset = Item.objects.all()
+        # get all orders for user's organisation
+        orders = Order.objects.filter(owner=profile.organisation.id)
+        # for each order, get all items:
+        items = []
+        for order in orders:
+            # find OrderItems with order=order.id
+            order_items = OrderItems.objects.filter(order=order.id)
+            for order_item in order_items:
+                if order_item != None:
+                    # get item from order_item:
+                    item = Item.objects.get(id=order_item.item.id)
+                    items.append(item)
+
+        return items

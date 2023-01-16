@@ -8,7 +8,7 @@ import { Snackbar } from '@mui/material';
 import { Alert } from '@mui/material';
 import {useState} from 'react';
 
-const ProductCardMUI = ({name, id, image, price, offset, dispatch, product}) => {
+const ProductCardMUI = ({dispatch, product}) => {
 
   const [state, setState] = useState({
     open: false,
@@ -50,25 +50,18 @@ const ProductCardMUI = ({name, id, image, price, offset, dispatch, product}) => 
         </Snackbar>
         <CardMedia
           component="img"
-          alt={name}
+          alt={product.name}
           height="150"
-          image={image}
+          image={product.image_url}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {name}
+            {product.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-          Price: £{price}
-          <br />
-          Offset price: £{offset}
-          </Typography>
+         
         </CardContent>
         <CardActions>
-        <a className="compare-link"href={`/products/${id}/${name}`} style={{marginLeft: '10px'}}>Compare</a>
-          {/* <div className="add-button" onClick={(e) => e.preventDefault}>
-            ADD
-          </div> */}
+        
           <Button
             variant="contained"
             // href="/cart"
@@ -84,10 +77,10 @@ const ProductCardMUI = ({name, id, image, price, offset, dispatch, product}) => 
               },
             }}
             onClick={() => {
-              // dispatch({
-              //   type: "ADD_TO_CART",
-              //   payload: { product, quantity: 1 },
-              // });
+              dispatch({
+                type: "ADD_TO_CART",
+                payload: { product, quantity: 1 },
+              });
               addToCart();
             }}
           >
