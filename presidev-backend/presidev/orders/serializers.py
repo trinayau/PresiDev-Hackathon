@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserExtended, Order, Item, Category, FavItem, OrderItems
+from .models import UserExtended, Order, Item, Category, FavItem, OrderItems, Status
 
 class UserExtendedSerializer(serializers.ModelSerializer):
 
@@ -19,13 +19,13 @@ class OrderSerializer(serializers.ModelSerializer):
         # if a user accepts an order
         request = self.context.get("request")
         if (request.query_params['accept'] is not None):
-            print('here')
             user = None
             if request and hasattr(request, "user"):
                 user = request.user
                 profile = UserExtended.objects.get(user=user)
                 organisation = profile.organisation
                 instance.operational_hub = organisation
+                instance.status = Status.objects.get(pk=2)
                 instance.save()
 
             return instance
