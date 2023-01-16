@@ -4,8 +4,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.models import Permission
 
-from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer
+from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem, Status
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer, StatusSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -62,6 +62,12 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
     http_method_names = ["get", "post", "put", "delete"]
+
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

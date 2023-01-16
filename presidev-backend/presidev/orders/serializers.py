@@ -18,7 +18,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
         # if a user accepts an order
         request = self.context.get("request")
-        if (request.query_params['accept'] is not None):
+        try: 
+            request_type = request.query_params['accept']
             user = None
             if request and hasattr(request, "user"):
                 user = request.user
@@ -30,7 +31,19 @@ class OrderSerializer(serializers.ModelSerializer):
 
             return instance
         
-        return instance
+        except:
+            pass
+
+        try:
+            request_type = request.query_params['status']
+            new_status = Status.objects.get(pk=request_type)
+            instance.status = new_status
+            instance.save()
+            
+            return instance
+        
+        except:
+            return instance
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -57,5 +70,12 @@ class OrderItemsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItems
+        fields = '__all__'
+        depth = 1
+
+class StatusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Status
         fields = '__all__'
         depth = 1

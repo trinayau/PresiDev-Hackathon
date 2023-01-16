@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { API_ENDPOINT } from '../../settings'
 import AuthContext from '../../context/AuthContext';
 import { DataGrid } from '@mui/x-data-grid';
-import { Button, LinearProgress } from '@mui/material';
+import { Box, Button, LinearProgress, MenuItem, Select, Typography, InputLabel } from '@mui/material';
 import { useSnackbar } from 'notistack';
   
 
@@ -15,39 +15,58 @@ const OrderItems = () => {
     const {id} = useParams()
     const [order, setOrder] = useState({items: []})
     const [loading, setLoading] = useState(false)
+    const [reload, setReload] = useState(false)
+    const [statusList, setStatusList] = useState([])
     const { authTokens } = useContext(AuthContext);
-    const  {enqueueSnackbar}  = useSnackbar();
+    const {enqueueSnackbar}  = useSnackbar();
 
     useEffect(()=> {
         (async () => {
             setLoading(true)
-            const response = await axios.get(`${API_ENDPOINT}/orders/order/${id}`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
-            setOrder(response?.data)
+            const responseOrder = await axios.get(`${API_ENDPOINT}/orders/order/${id}`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
+            setOrder(responseOrder?.data)
+            const responseStatus = await axios.get(`${API_ENDPOINT}/orders/status`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
+            
+            const statusListFiltered = responseStatus?.data.filter(status => status.id !== 1 && status.id !== 5)
+            console.log(responseOrder)
+            setStatusList(statusListFiltered)
             setLoading(false)
-            console.log(response?.data)
         })()
-    }, [])
+    }, [reload])
 
     const columns = [
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'description', headerName: 'Description', width: 200 },
         { field: 'url', headerName: 'Image Url', width: 200 },
         { field: 'category', headerName: 'Category', width: 200, valueGetter: (params) => params?.row?.categories?.name }
-
-        // { field: 'owner', headerName: 'Owner', width: 200, valueGetter: (params) => params?.row?.owner?.name },
-        // { field: 'accepted', headerName: 'Accepted', width: 200, renderCell: (params) => params?.row?.operational_hub ? <p>{params?.row?.operational_hub?.name}</p> : <p>Unassigned</p>  },
-        // { field: 'viewOrder', headerName: 'ViewOrder', width: 200, renderCell: (params) => <Button component={Link} to={`${params.row.id}`}>View Order</Button> }
     ]
 
     const acceptOrder = async () => {
         const response = await axios.patch(`${API_ENDPOINT}/orders/order/${id}/?accept`, {}, { headers: { Authorization: `Bearer ${authTokens.access}` } })
         if (response.status == 200){
             enqueueSnackbar('Order Accepted!', {variant: 'success', anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'center'
+            }})
+            setReload(!reload)
+        } else {
+            enqueueSnackbar('There was a error accepting this order', {variant: 'warning', anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'center'
+            }})
+        }
+    }
+
+    const handleStatusChange = async status => {
+        const response = await axios.patch(`${API_ENDPOINT}/orders/order/${id}/?status=${status.id}`, {}, { headers: { Authorization: `Bearer ${authTokens.access}` } })
+        if (response.status == 200){
+            enqueueSnackbar('Status Changed!', {variant: 'success', anchorOrigin: {
                     vertical: 'top',
                     horizontal: 'center'
                 }})
+                setReload(!reload)
         } else {
-            enqueueSnackbar('There was a error accepting this order', {variant: 'warning', anchorOrigin: {
+            enqueueSnackbar('There was a error changing this status', {variant: 'warning', anchorOrigin: {
                 vertical: 'top',
                 horizontal: 'center'
             }})
@@ -57,7 +76,39 @@ const OrderItems = () => {
 
     return (
         <>
-            {order?.status?.name === "Placed" && order?.operational_hub === null && <Button color='success' variant='outlined' sx={{my: 5}} onClick={() => acceptOrder()} >Accept Order</Button>}
+            <Box
+                sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 3}}
+            >
+                <Box>
+                    <Typography variant='h4' >Order Details:</Typography>
+                    <Typography>Name: {order?.name}</Typography>
+                    <Typography>Description: {order?.description}</Typography>
+                    <Typography>Owner: {order?.owner?.name}</Typography>
+                    <Typography>Status: {order?.status?.name}</Typography>
+                </Box>
+
+                <Box>
+                    {
+                        order?.operational_hub === null ? 
+                        <Button color='success' variant='outlined' sx={{my: 5}} onClick={() => acceptOrder()} >Accept Order</Button>
+                        :
+                        <>
+                            <Typography>Change Order Status</Typography>
+                            <Select 
+                                sx={{minWidth: 200, color: 'black'}}
+                                label='Set Order Status'
+                            >
+                                    {statusList.map(status => 
+                                        <MenuItem
+                                        onClick={() => handleStatusChange(status)}
+                                        >{status?.name}</MenuItem>
+                                        )}
+                                </Select>
+                        </>
+                    }
+                </Box>
+            </Box>
+
                 <div style={{ height: 600, width: '75vw' }}>
                 <DataGrid
                     disableSelectionOnClick
