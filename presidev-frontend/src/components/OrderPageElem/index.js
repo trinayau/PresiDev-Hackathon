@@ -41,7 +41,7 @@ const OrderPageElem = ({ order }) => {
     }
 
     return (
-        <div className="orderpage-elem container order my-2" id={order.id}>
+        <div className="orderpage-elem container order my-4">
             <div className="orderpage-elem__item d-flex row">
                 <div className="orderpage-elem__item-info ">
                     <div className="row">

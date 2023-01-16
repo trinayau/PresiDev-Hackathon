@@ -17,7 +17,7 @@ const Routing = () =>
                     >
                         <Sidebar />
                         <Box
-                            sx={{margin: 2}}
+                            sx={{margin: 6}}
                         >
                             <Routes>
                                 <Route path="/account" element={<AccountPage />} />

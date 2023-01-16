@@ -89,7 +89,7 @@ class Order(models.Model):
     name = models.CharField(max_length=128, null=False, blank=False)
     description = models.CharField(max_length=256, null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
     owner = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='owner')
     operational_hub = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='operational_hub', null=True, blank=True)
     items = models.ManyToManyField(Item, through="OrderItems")

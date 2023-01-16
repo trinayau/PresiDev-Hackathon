@@ -33,8 +33,7 @@ const AllProductPage = () => {
 
   return (
     <div className="productsPage">
-        <div className="container">
-   
+        <div className="container-fluid">
           <p className="product-heading h1 pt-3">Categories</p>
           </div>
           <SearchBar/>  
