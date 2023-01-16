@@ -34,7 +34,6 @@ const ProductCardMUI = ({dispatch, product}) => {
   
   };
 
-  console.log(product, 'product card')
 
     return (
       <Card sx={{ minWidth: '300px', maxWidth: 300 }}>

@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react';
 const OrderPageElem = ({ order }) => {
     // const [orderStatus, setOrderStatus] = useState()
 
-    // add .green to step depending on order status:
+  
     useEffect(() => {
         const orderStatus = order.status.name.toLowerCase();
-
+        // wait for page to load:
+        
         // find the container with the id of order.id and add green to the step with the id of step-1:
+        
         const orderContainer = document.getElementById(order.id)
+        
         if (orderStatus === "placed") {
             orderContainer.querySelector(`#step-1`).classList.add("green")
         } else if (orderStatus === "accepted") {
@@ -41,7 +44,7 @@ const OrderPageElem = ({ order }) => {
     }
 
     return (
-        <div className="orderpage-elem container order my-4">
+        <div className="orderpage-elem container order my-4" id={order.id}>
             <div className="orderpage-elem__item d-flex row">
                 <div className="orderpage-elem__item-info ">
                     <div className="row">

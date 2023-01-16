@@ -83,7 +83,7 @@ const OrderDetail = () => {
                   <Favorite fontSize='large' style={{ color: 'red', opacity: 0.8, }} />
                   <div className="d-flex align-items-center mt-2">
                     <div className="tag">Favourites</div>
-                    <div className="ms-auto number">{favs!==[] && favs}</div>
+                    <div className="ms-auto number">{favs!==[] ? favs : 0}</div>
                   </div>
                 </div>
               </div>
