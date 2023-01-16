@@ -14,6 +14,24 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
         depth = 2
 
+    def update(self, instance, validated_data):
+
+        # if a user accepts an order
+        request = self.context.get("request")
+        if (request.query_params['accept'] is not None):
+            print('here')
+            user = None
+            if request and hasattr(request, "user"):
+                user = request.user
+                profile = UserExtended.objects.get(user=user)
+                organisation = profile.organisation
+                instance.operational_hub = organisation
+                instance.save()
+
+            return instance
+        
+        return instance
+
 
 class ItemSerializer(serializers.ModelSerializer):
 

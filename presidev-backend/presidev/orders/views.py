@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.contrib.auth.models import Permission
 
 from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem
 from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer
@@ -32,16 +33,15 @@ class OrderViewSet(viewsets.ModelViewSet):
         "post",
         "put",
         "delete",
-    ]
+        "patch"
+    ]        
 
     def get_queryset(self):
         
         # get user org type
         user = self.request.user
-        profile = UserExtended.objects.get(user__id=user.id)
-
+        profile = UserExtended.objects.get(user=user)
         queryset_all = Order.objects.all()
-
 
         # if end user...
         if (profile.organisation.organisation_type.name == "End User"):
@@ -56,8 +56,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             # list of orders from linked organisations
             queryset = queryset_all.filter(owner__in=linked_orgnaisations)
             return queryset
-
-
 
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()

@@ -6,21 +6,25 @@ import { useContext } from 'react';
 import { API_ENDPOINT } from '../../settings'
 import AuthContext from '../../context/AuthContext';
 import { DataGrid } from '@mui/x-data-grid';
-import { LinearProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
+import { useSnackbar } from 'notistack';
+  
 
 const OrderItems = () => {
 
     const {id} = useParams()
-    const [order, setOrder] = useState([])
+    const [order, setOrder] = useState({items: []})
     const [loading, setLoading] = useState(false)
-    let { authTokens } = useContext(AuthContext);
+    const { authTokens } = useContext(AuthContext);
+    const  {enqueueSnackbar}  = useSnackbar();
 
     useEffect(()=> {
         (async () => {
             setLoading(true)
             const response = await axios.get(`${API_ENDPOINT}/orders/order/${id}`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
-            setOrder(response?.data?.items)
+            setOrder(response?.data)
             setLoading(false)
+            console.log(response?.data)
         })()
     }, [])
 
@@ -35,20 +39,39 @@ const OrderItems = () => {
         // { field: 'viewOrder', headerName: 'ViewOrder', width: 200, renderCell: (params) => <Button component={Link} to={`${params.row.id}`}>View Order</Button> }
     ]
 
+    const acceptOrder = async () => {
+        const response = await axios.patch(`${API_ENDPOINT}/orders/order/${id}/?accept`, {}, { headers: { Authorization: `Bearer ${authTokens.access}` } })
+        if (response.status == 200){
+            enqueueSnackbar('Order Accepted!', {variant: 'success', anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'center'
+                }})
+        } else {
+            enqueueSnackbar('There was a error accepting this order', {variant: 'warning', anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'center'
+            }})
+        }
+        console.log(response)
+    }
+
     return (
-        <div style={{ height: 400, width: '75vw' }}>
-            <DataGrid
-                disableSelectionOnClick
-                rows={order}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                loading={loading}
-                components={{
-                    LoadingOverlay: LinearProgress,
-                }}
-            />
-        </div>
+        <>
+            {order?.status?.name === "Placed" && order?.operational_hub === null && <Button color='success' variant='outlined' sx={{my: 5}} onClick={() => acceptOrder()} >Accept Order</Button>}
+                <div style={{ height: 600, width: '75vw' }}>
+                <DataGrid
+                    disableSelectionOnClick
+                    rows={order?.items}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    loading={loading}
+                    components={{
+                        LoadingOverlay: LinearProgress,
+                    }}
+                />
+            </div>
+        </>
     )
 
 }

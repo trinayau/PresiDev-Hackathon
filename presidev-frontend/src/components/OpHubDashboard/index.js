@@ -12,7 +12,7 @@ const OpHubDashboard = ({orders, loading}) => {
         { field: 'status', headerName: 'Status', width: 200, valueGetter: (params) => params?.row?.status?.name },
         { field: 'owner', headerName: 'Owner', width: 200, valueGetter: (params) => params?.row?.owner?.name },
         { field: 'accepted', headerName: 'Accepted', width: 200, renderCell: (params) => params?.row?.operational_hub ? <p>{params?.row?.operational_hub?.name}</p> : <p>Unassigned</p>  },
-        { field: 'viewOrder', headerName: 'ViewOrder', width: 200, renderCell: (params) => <Button component={Link} to={`${params.row.id}`}>View Order</Button> }
+        { field: 'viewOrder', headerName: '', width: 200, renderCell: (params) => <Button component={Link} to={`${params.row.id}`}>View Order</Button> },
     ]
 
     return (
