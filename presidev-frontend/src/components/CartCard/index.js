@@ -58,10 +58,10 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
   // }
 
   return (
-    <div class="cart-item">
-      <div>
+    <div className="cart-item">
+      <div className="img-container">
         <img
-          class="cart-img"
+          className="cart-img img-fluid"
           src={`${cartItem.image_url}`}
           alt={`${cartItem.name}`}
         />
@@ -69,20 +69,20 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
       <div class="cart-info">
         <div class="cart-item-name">
             {cartItem.name}</div>
-            <div cart-item-supplier>Desc: {cartItem.description}</div>
+            <div className="cart-item-supplier">Desc: {cartItem.description}</div>
 
         <div className="cart-item-info">
           
-          <div class="cart-item-details">
+          <div className="cart-item-details">
             <span className="quantity-changers" onClick={minus} style={{cursor: 'pointer'}}>
               -
             </span>{" "}
-            <span class="quantity-box">{quantity}</span>{" "}
+            <span className="quantity-box">{quantity}</span>{" "}
             <span className="quantity-changers" onClick={plus} style={{cursor: 'pointer'}}>
               +
             </span>
           </div>
-          <div class="cart-item-details">
+          <div className="cart-item-details">
             <DeleteIcon sx={{
               ":hover": {
                 color: "#354F52",

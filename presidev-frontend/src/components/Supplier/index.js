@@ -77,9 +77,12 @@ const Supplier = ({product}) => {
   const dispatch = Globalstate.info.dispatch;
 
     // cart function
-    const addToCart = () => {
-        console.log('add to cart')
-        dispatch({ type: "ADD_TO_CART", payload: { product, quantity: 1 } });
+    const addToCart = (e) => {
+        e.preventDefault()
+        dispatch({ type: "ADD_TO_CART", payload: { product, quantity: quantity } });
+
+        setState({open: true, vertical: 'top', horizontal: 'center'})
+        setMessage('Item added to cart')
 
     }
 
@@ -104,7 +107,7 @@ const Supplier = ({product}) => {
    </div>
     <div className="add-cart">
     <ShoppingCartIcon 
-    onClick={addToCart} 
+    onClick={(e)=>addToCart(e)} 
     sx={{
         ":hover": {
             color: "#52796f",

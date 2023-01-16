@@ -73,7 +73,7 @@ const CartPage = () => {
       </div>
       <div class="cart-page-footer">
    
-        <div className="cart-page-footer-checkout d-flex justify-content-evenly">
+        <div className="cart-page-footer-checkout ">
           <p>Total Quantity: {state && totalQuantity}</p>
         <Button variant="contained" onClick={() => handleCheckout()} sx={{backgroundColor:'#354F52', my:'5px'}}>Checkout</Button>
         </div>

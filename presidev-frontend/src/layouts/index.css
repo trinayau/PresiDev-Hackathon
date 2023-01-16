@@ -2919,3 +2919,9 @@ min-height: none!important;
     text-align: center;
   }
 }
+
+/* prev ordered page */
+.previousproduct-container{
+flex-wrap: wrap;
+}
+

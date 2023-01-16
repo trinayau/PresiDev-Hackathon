@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.models import Permission
+from datetime import datetime 
 
 from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem, Status
 from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer, StatusSerializer
@@ -65,6 +66,59 @@ class OrderViewSet(viewsets.ModelViewSet):
             queryset = queryset_all.filter(operational_hub__in=linked_orgnaisations)
             return queryset
 
+    def create(self, request, *args, **kwargs):
+        user = self.request.user
+        profile = UserExtended.objects.get(user=user)
+        # check if user is end user
+        if (profile.organisation.organisation_type.name == "End User"):
+            # create order
+            orderName = 'Order for ' + profile.organisation.name
+            orderDescription = 'Order for ' + profile.organisation.name + ' on ' + str(datetime.now())
+            if profile.organisation.linked_organisations.first() is not None:
+                operational_hub=profile.organisation.linked_organisations.first()
+            else:
+                operational_hub=None
+            print(operational_hub, "operational_hub!!!!!")
+
+            order = Order.objects.create(owner=profile.organisation, name=orderName, description=orderDescription, )    
+            order.save()
+            print('order created!!!!!')
+            
+            # create order items from request:
+            if request.data["items"] is not None:
+                items = request.data["items"]
+                for item in items:
+                    # find item from Items:
+                    found_item = Item.objects.get(id=item["id"])
+                    # # create order item:
+                    order_item = OrderItems.objects.create(order=order, item=found_item, quantity=1)
+                    order_item.save()
+
+            #create items from customitems in request:
+            
+            if request.data["custom_items"] is not None:
+                custom_items = request.data["custom_items"]
+                for custom_item in custom_items:
+                    # create item
+                    # find uncategorised from Category:
+                    
+                    # if custom_item has image_url, create variable image_url:
+                    url=""
+                    if custom_item["url"] is not None:
+                        url = custom_item["url"]
+                    else:
+                        url = ""
+                    item = Item.objects.create(name=custom_item["name"], description=custom_item["description"], url=url)
+                    item.save()
+                    uncategorised = Category.objects.get(name="Uncategorised")
+                    item.categories.add(uncategorised)
+                    # create order item
+                    order_item = OrderItems.objects.create(order=order, item=item, quantity=custom_item["quantity"])
+                    order_item.save()
+        
+            return Response({"message": "Order created!"})
+        else:
+            return Response({"message": "Only end users can create orders!"})
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer

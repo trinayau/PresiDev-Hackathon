@@ -8,9 +8,19 @@ export const CartProvider = (props) => {
         const tempstate = state.filter(
           (item) => action.payload.product.id === item.product.id
         );
+
+        // if item is already in cart, increase quantity:
+
         if (tempstate.length > 0) {
-          console.log(state)
-          return state;
+          const tempstate = state.map((item) => {
+            if (item.product.id === action.payload.product.id) {
+              return { ...item, quantity: item.quantity + parseInt(action.payload.quantity) };
+            } else {
+              return item;
+            }
+          });
+          return tempstate;
+
         } else {
           return [...state, action.payload];
         }

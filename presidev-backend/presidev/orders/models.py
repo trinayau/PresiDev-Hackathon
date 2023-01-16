@@ -92,6 +92,7 @@ class Order(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
     owner = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='owner')
     operational_hub = models.ForeignKey(Organisation, on_delete=models.CASCADE, related_name='operational_hub', null=True, blank=True)
+    notes=  models.CharField(max_length=256, null=True, blank=True)
     items = models.ManyToManyField(Item, through="OrderItems")
 
     def __str__(self):
@@ -106,6 +107,8 @@ class OrderItems(models.Model):
     def __str__(self):
        return self.order.name + ' - ' + self.item.name
 
+    def __getitem__(self, key): # this allows getting an element (overrided method)
+        return self._vet[key]
 
 class ItemPricing(models.Model):
     quantity = models.IntegerField()
