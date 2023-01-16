@@ -58,7 +58,7 @@ const FavouriteCard = ({
     };
 
   return (
-    <Card sx={{ minWidth: "300px", maxWidth: 300, margin: '50px 0px 50px 0px' }}>
+    <Card sx={{ minWidth: "300px", maxWidth: 300, margin: '50px 50px 50px 0px' }}>
       <Snackbar
         open={open}
         autoHideDuration={2000}

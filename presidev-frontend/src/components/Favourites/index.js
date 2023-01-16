@@ -48,7 +48,7 @@ const Favourites = () => {
                  
     <div className="favourites-heading h1">Favourites</div>
 
-    <div className="favourites-list">
+    <div className="favourites-list" style={{display: 'flex', flexDirection: 'row'}}>
         {favourites ? favourites.map((favourite) => (
             <FavouriteCard key={favourite.id} favourite={favourite} removeFavourite={removeFavourite} />
         )): <div className="h3">No favourites yet</div>}

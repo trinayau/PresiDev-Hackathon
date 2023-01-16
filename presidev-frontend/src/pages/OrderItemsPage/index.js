@@ -41,6 +41,7 @@ const OrderItems = () => {
     const columns = [
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'description', headerName: 'Description', width: 200 },
+        { field: 'quantity', headerName: 'Quantity', width: 200 },
         { field: 'url', headerName: 'Image Url', width: 200 },
         { field: 'category', headerName: 'Category', width: 200, valueGetter: (params) => params?.row?.categories?.name }
     ]
@@ -86,6 +87,12 @@ const OrderItems = () => {
         return `${day}/${month}/${year}`
     }
 
+    const createRows = () => 
+        order?.items.map(item => {
+            return {...item.item, quantity: item.quantity}
+        })
+    
+
     return (
         <>
             <Box
@@ -126,7 +133,7 @@ const OrderItems = () => {
                 <div style={{ height: 600, width: '75vw' }}>
                 <DataGrid
                     disableSelectionOnClick
-                    rows={order?.items}
+                    rows={createRows()}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

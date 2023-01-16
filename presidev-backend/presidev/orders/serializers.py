@@ -8,7 +8,20 @@ class UserExtendedSerializer(serializers.ModelSerializer):
         fields = ['user', 'phone', 'location', 'user_type', 'organisation']
         depth = 2
 
+
+
+class OrderItemsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderItems
+        fields = ['item', 'quantity']
+        depth = 2
+
+
 class OrderSerializer(serializers.ModelSerializer):
+
+    items = OrderItemsSerializer(source='orderitems_set', many=True)
+
     class Meta:
         model = Order
         fields = '__all__'
@@ -39,7 +52,7 @@ class OrderSerializer(serializers.ModelSerializer):
             new_status = Status.objects.get(pk=request_type)
             instance.status = new_status
             instance.save()
-            
+
             return instance
         
         except:
@@ -63,13 +76,6 @@ class FavItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FavItem
-        fields = '__all__'
-        depth = 1
-
-class OrderItemsSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = OrderItems
         fields = '__all__'
         depth = 1
 

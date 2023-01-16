@@ -1,4 +1,4 @@
-import {useEffect, useState, useContext} from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { API_ENDPOINT } from '../../settings';
 import AuthContext from '../../context/AuthContext';
@@ -18,21 +18,26 @@ const PreviousProductPage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const getItems = async () => {
-            const response = await axios.get(`${API_ENDPOINT}/orders/oldorders/`, { headers: { Authorization: `Bearer ${authTokens.access}` } });
-            setItems(response.data)
-            setLoading(false)
-        }
-        getItems()
-    }, [authTokens])
-    return ( <div className="previousproduct-container">
-        <p className="product-heading h1 pt-3">Previously Ordered Page</p>
-        {loading ?  <CircularProgress  sx={{color: '#52796f'}} /> : items.map((item) => {
-            return <ProductCardMUI product={item} dispatch={dispatch}/>
+  useEffect(() => {
+    const getItems = async () => {
+      const response = await axios.get(`${API_ENDPOINT}/orders/oldorders/`, { headers: { Authorization: `Bearer ${authTokens.access}` } });
+      setItems(response.data)
+      setLoading(false)
+    }
+    getItems()
+  }, [authTokens])
+  return (
+    <>
+      <p className="product-heading h1 pt-3">Previously Ordered Page</p>
+      <div className="previousproduct-container" style={{ display: 'flex' }}>
+        {loading ? <CircularProgress sx={{ color: '#52796f' }} /> : items.map((item) => {
+          return <ProductCardMUI product={item} dispatch={dispatch} />
         })}
 
-    </div> );
+      </div>
+
+    </>
+  );
 }
- 
+
 export default PreviousProductPage;

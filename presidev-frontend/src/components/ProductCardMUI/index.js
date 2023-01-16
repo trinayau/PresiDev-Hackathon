@@ -36,7 +36,7 @@ const ProductCardMUI = ({dispatch, product}) => {
 
 
     return (
-      <Card sx={{ minWidth: '300px', maxWidth: 300 }}>
+      <Card sx={{ minWidth: '300px', maxWidth: 300, margin: '50px' }}>
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{
       vertical: "top",
       horizontal: "center"
