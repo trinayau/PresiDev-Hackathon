@@ -56,6 +56,14 @@ class OrderViewSet(viewsets.ModelViewSet):
             # list of orders from linked organisations
             queryset = queryset_all.filter(owner__in=linked_orgnaisations)
             return queryset
+        
+        # if operational hub...
+        elif (profile.organisation.organisation_type.name == "Supplier"):
+            # list of linked organisations
+            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            # list of orders from linked organisations
+            queryset = queryset_all.filter(operational_hub__in=linked_orgnaisations)
+            return queryset
 
 class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()

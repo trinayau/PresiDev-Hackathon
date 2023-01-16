@@ -17,7 +17,7 @@ const OrderItems = () => {
     const [loading, setLoading] = useState(false)
     const [reload, setReload] = useState(false)
     const [statusList, setStatusList] = useState([])
-    const { authTokens } = useContext(AuthContext);
+    const { authTokens, user } = useContext(AuthContext);
     const {enqueueSnackbar}  = useSnackbar();
 
     useEffect(()=> {
@@ -27,8 +27,12 @@ const OrderItems = () => {
             setOrder(responseOrder?.data)
             const responseStatus = await axios.get(`${API_ENDPOINT}/orders/status`, { headers: { Authorization: `Bearer ${authTokens.access}` } })
             
-            const statusListFiltered = responseStatus?.data.filter(status => status.id !== 1 && status.id !== 5)
-            console.log(responseOrder)
+            let statusListFiltered = []
+            if (user.profile.organisation.organisation_type.name === 'Operational Hub') {
+                statusListFiltered = responseStatus?.data.filter(status => status.id !== 1 && status.id !== 5)
+            } else if (user.profile.organisation.organisation_type.name === 'End User') {
+                statusListFiltered = responseStatus?.data.filter(status => status.id === 1 || status.id === 5)
+            }
             setStatusList(statusListFiltered)
             setLoading(false)
         })()
@@ -74,6 +78,14 @@ const OrderItems = () => {
         console.log(response)
     }
 
+    const parseDate = (date) => {
+        const orderDate = new Date(date)
+        const year = orderDate.getFullYear()
+        const month = orderDate.getMonth()+1
+        const day = orderDate.getDate()
+        return `${day}/${month}/${year}`
+    }
+
     return (
         <>
             <Box
@@ -83,12 +95,14 @@ const OrderItems = () => {
                     <Typography variant='h4' >Order Details:</Typography>
                     <Typography>Name: {order?.name}</Typography>
                     <Typography>Description: {order?.description}</Typography>
+                    <Typography>Date ordered: {parseDate(order?.created_at)}</Typography>
                     <Typography>Owner: {order?.owner?.name}</Typography>
                     <Typography>Status: {order?.status?.name}</Typography>
                 </Box>
 
                 <Box>
                     {
+                        user.profile.organisation.organisation_type.name === 'Supplier' ? null : 
                         order?.operational_hub === null ? 
                         <Button color='success' variant='outlined' sx={{my: 5}} onClick={() => acceptOrder()} >Accept Order</Button>
                         :

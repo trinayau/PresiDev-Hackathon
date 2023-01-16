@@ -1,4 +1,6 @@
+import { Button } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const OrderPageElem = ({ order }) => {
     // const [orderStatus, setOrderStatus] = useState()
@@ -49,7 +51,8 @@ const OrderPageElem = ({ order }) => {
                 <div className="orderpage-elem__item-info ">
                     <div className="row">
                         <p className="h4 col-6">Order #{order.id}</p>
-                        <btn class="btn btn-primary text-uppercase col-6" onClick={() => console.log('open order')} >order info</btn>
+                        {/* <btn class="btn btn-primary text-uppercase col-6" onClick={() => console.log('open order')} >order info</btn> */}
+                        <Button variant='outlined' component={Link} to={`${order.id}`}>View Order</Button>
                     </div>
                     <p>Products: {order.items.length}</p>
                     <p>Order date: {parseDate(order.created_at)}</p>

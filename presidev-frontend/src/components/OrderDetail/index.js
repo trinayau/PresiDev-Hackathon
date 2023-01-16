@@ -108,9 +108,13 @@ const OrderDetail = () => {
     : user?.profile?.organisation?.organisation_type?.name === "Operational Hub" ?
 
     <OpHubDashboard orders={orders} loading={loading} />
-
-    : 
     
+    : user?.profile?.organisation?.organisation_type?.name === "Supplier" ?
+    
+    <OpHubDashboard orders={orders} loading={loading} />
+    
+    :
+
     <p>Incomplete User Profile or unknown org type</p>
 
   );
