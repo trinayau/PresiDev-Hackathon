@@ -34,6 +34,8 @@ const ProductCardMUI = ({dispatch, product}) => {
   
   };
 
+  console.log(product, 'product card')
+
     return (
       <Card sx={{ minWidth: '300px', maxWidth: 300 }}>
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{
@@ -48,14 +50,14 @@ const ProductCardMUI = ({dispatch, product}) => {
            Added to cart!
           </Alert>
         </Snackbar>
-        <CardMedia
+        {product.image_url ? <CardMedia
           component="img"
           alt={product.name}
           height="150"
           image={product.image_url}
-        />
+        /> : ''}
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="p" component="div">
             {product.name}
           </Typography>
          

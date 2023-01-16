@@ -9,6 +9,7 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
   const [totalOffset, setTotalOffset] = useState(cartItem.offset * quantity);
   const [totalCost, setTotalCost] = useState(cartItem.total);
   const [isEditing, setIsEditing] = useState(false);
+  console.log("cartItem", cartItem);
 
   useEffect(() => {
     setQuantity(itemQuantity);

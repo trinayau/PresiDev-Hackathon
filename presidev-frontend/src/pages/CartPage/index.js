@@ -68,7 +68,7 @@ const CartPage = () => {
       <>
       <div class="cart">
          {state.map((cartItem) => (
-          <CartCard id={ cartItem.id } key={cartItem.id} cartItem={cartItem.product} itemQuantity={cartItem.quantity} cartTotal={cartTotal} setCartTotal={setCartTotal} dispatch={dispatch}/>
+          <CartCard cartItem={cartItem.product} id={ cartItem.id } key={cartItem.id} itemQuantity={cartItem.quantity} cartTotal={cartTotal} setCartTotal={setCartTotal} dispatch={dispatch}/>
         ))}
       </div>
       <div class="cart-page-footer">
