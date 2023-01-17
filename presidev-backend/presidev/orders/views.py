@@ -53,17 +53,17 @@ class OrderViewSet(viewsets.ModelViewSet):
         # if operational hub...
         elif (profile.organisation.organisation_type.name == "Operational Hub"):
             # list of linked organisations
-            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            linked_organisation = Organisation.objects.filter(linked_organisations=profile.organisation.id)
             # list of orders from linked organisations
-            queryset = queryset_all.filter(owner__in=linked_orgnaisations)
+            queryset = queryset_all.filter(owner__in=linked_organisation)
             return queryset
         
         # if operational hub...
         elif (profile.organisation.organisation_type.name == "Supplier"):
             # list of linked organisations
-            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            linked_organisation = Organisation.objects.filter(linked_organisations=profile.organisation.id)
             # list of orders from linked organisations
-            queryset = queryset_all.filter(operational_hub__in=linked_orgnaisations)
+            queryset = queryset_all.filter(operational_hub__in=linked_organisation)
             return queryset
 
     def create(self, request, *args, **kwargs):
