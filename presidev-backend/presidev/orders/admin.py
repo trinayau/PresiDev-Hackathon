@@ -15,3 +15,4 @@ admin.site.register(OrderItems)
 admin.site.register(OrganisationItem)
 admin.site.register(UserExtended)
 admin.site.register(FavItem)
+admin.site.site_header = 'Presidium Platform Administration'
