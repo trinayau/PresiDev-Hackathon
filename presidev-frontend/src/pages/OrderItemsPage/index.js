@@ -42,7 +42,7 @@ const OrderItems = () => {
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'description', headerName: 'Description', width: 200 },
         { field: 'quantity', headerName: 'Quantity', width: 200 },
-        { field: 'url', headerName: 'Image Url', width: 200 },
+        { field: 'url', headerName: 'Url', width: 200 },
         { field: 'category', headerName: 'Category', width: 200, valueGetter: (params) => params?.row?.categories?.name }
     ]
 

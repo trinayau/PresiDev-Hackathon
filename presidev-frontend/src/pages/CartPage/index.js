@@ -1,6 +1,6 @@
-import { SearchBar, CartCard } from "../../components";
+import { SearchBar, CartCard, CustomItemForm, CustomItemCard } from "../../components";
 import Button from '@mui/material/Button';
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../context/Context";
 import AuthContext from "../../context/AuthContext";
 import "./index.css";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_ENDPOINT } from "../../settings";
 import { CustomItemContext } from "../../context/CustomItemContext";
+
+
 
 const CartPage = () => {
 
@@ -20,15 +22,26 @@ const CartPage = () => {
   const CustomItemState = useContext(CustomItemContext);
   const customState = CustomItemState.info.state;
   const CustomItemDispatch = CustomItemState.info.dispatch;
-  console.log(customState, "customState");
 
+  console.log(customState, "customState");
 
   const { authTokens } = useContext(AuthContext);
 
-  const totalQuantity = state.reduce((total, item) => {
-    const totalQuantity = total + item.quantity;
-    return totalQuantity;
-  }, 0);
+  useEffect(() => {
+    const totalStateQuantity = state.reduce((acc, item) => {
+      return acc + item.quantity;
+    }
+    , 0);
+
+    const totalCustomStateQuantity = customState.reduce((acc, item) => {
+      return acc + item.quantity;
+    }
+    , 0);
+
+    const total = totalStateQuantity + totalCustomStateQuantity;
+
+    setCartTotal(total);
+  }, [customState, state]);
 
 
   const navigate = useNavigate();
@@ -62,8 +75,7 @@ const CartPage = () => {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${authTokens.access})}`
-      },
-      body: JSON.stringify(cartItems),
+      }
     });
 
     // get back order id
@@ -71,8 +83,9 @@ const CartPage = () => {
     console.log(data, "data");
     // redirect to checkout page with order id
     handleLink(`/orders/${data.order}`);
-    // empty cart
+    // empty carts
     dispatch({ type: "CLEAR" });
+    CustomItemDispatch({ type: "CLEAR" });
    }
 
 
@@ -80,17 +93,24 @@ const CartPage = () => {
   return (
     <>
       <p className="product-heading h1 pt-3">Shopping Cart</p>
-      {state && state.length > 0 ?
+      {(state && state.length > 0) || (customState && customState.length > 0) ?
       <>
       <div class="cart">
          {state.map((cartItem) => (
           <CartCard cartItem={cartItem.product} id={ cartItem.id } key={cartItem.id} itemQuantity={cartItem.quantity} cartTotal={cartTotal} setCartTotal={setCartTotal} dispatch={dispatch}/>
         ))}
       </div>
+  {customState && customState.length > 0 ? <div className="cart-page-custom-items">
+    <p className="product-heading h1 pt-3">Custom Items</p>
+    {customState.map((customItem) => (
+      <CustomItemCard customItem={customItem} key={customItem.id} dispatch={CustomItemDispatch}/>
+    ))}
+  </div> 
+  : null}
+
       <div class="cart-page-footer">
-   
         <div className="cart-page-footer-checkout ">
-          <p>Total Quantity: {state && totalQuantity}</p>
+          <p>Total Quantity: {state && cartTotal}</p>
         <Button variant="contained" onClick={() => handleCheckout()} sx={{backgroundColor:'#354F52', my:'5px'}}>Checkout</Button>
         </div>
       </div>
@@ -98,6 +118,8 @@ const CartPage = () => {
         <h2 className="product-heading pt-3">Your cart is empty</h2>
         <Button variant="contained" onClick={() => handleLink('/categories')} sx={{backgroundColor:'#354F52', my:'5px'}}>Continue Shopping</Button>
       </div>}
+      <CustomItemForm dispatch={CustomItemDispatch}/>
+      
     </>
   );
 };
