@@ -17,7 +17,7 @@ environ.Env.read_env()
 client = Client(env('sid'), env('authToken'))
 
 from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem, Status
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer, StatusSerializer
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSupplierSerializer, StatusSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -64,17 +64,17 @@ class OrderViewSet(viewsets.ModelViewSet):
         # if operational hub...
         elif (profile.organisation.organisation_type.name == "Operational Hub"):
             # list of linked organisations
-            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            linked_organisation = Organisation.objects.filter(linked_organisations=profile.organisation.id)
             # list of orders from linked organisations
-            queryset = queryset_all.filter(owner__in=linked_orgnaisations)
+            queryset = queryset_all.filter(owner__in=linked_organisation)
             return queryset
         
         # if operational hub...
         elif (profile.organisation.organisation_type.name == "Supplier"):
             # list of linked organisations
-            linked_orgnaisations = Organisation.objects.filter(linked_organisations=profile.organisation.id)
+            linked_organisation = Organisation.objects.filter(linked_organisations=profile.organisation.id)
             # list of orders from linked organisations
-            queryset = queryset_all.filter(operational_hub__in=linked_orgnaisations)
+            queryset = queryset_all.filter(operational_hub__in=linked_organisation)
             return queryset
 
     def create(self, request, *args, **kwargs):
@@ -263,4 +263,11 @@ def TwilioReply(request):
     
     print(clientmessage)
     return HttpResponse("Hi")
+    
+
+class OrderItemViewset(viewsets.ModelViewSet):
+    queryset = OrderItems.objects.all()
+    serializer_class = OrderItemsSupplierSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
     

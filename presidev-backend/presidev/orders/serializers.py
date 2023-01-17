@@ -18,6 +18,39 @@ class OrderItemsSerializer(serializers.ModelSerializer):
         depth = 2
 
 
+class OrderItemsSupplierSerializer(serializers.ModelSerializer):
+
+    id = serializers.IntegerField(source='item.id')
+    item_name = serializers.CharField(source='item.name')
+    item_description = serializers.CharField(source='item.name')
+    item_image_url = serializers.CharField(source='item.description')
+    item_url = serializers.CharField(source='item.url')
+    item_category = serializers.CharField(source='item.categories.name')
+    item_quantity = serializers.CharField(source='quantity')
+    order_name = serializers.CharField(source='order.name')
+    order_status = serializers.CharField(source='order.status')
+    order_created_at = serializers.CharField(source='order.created_at')
+    operational_hub = serializers.CharField(source='order.operational_hub')
+
+    class Meta:
+        model = OrderItems
+        # fields = ['item', 'quantity', 'order']
+        fields = [
+            "id",
+            "item_name",    
+            "item_description", 
+            "item_image_url",   
+            "item_url", 
+            "item_category",    
+            "item_quantity",    
+            "order_name",   
+            "order_status", 
+            "order_created_at", 
+            "operational_hub"
+        ]
+        depth = 3
+
+
 class OrderSerializer(serializers.ModelSerializer):
 
     items = OrderItemsSerializer(source='orderitems_set', many=True)

@@ -102,7 +102,7 @@ const OrderItems = () => {
                     <Typography variant='h4' >Order Details:</Typography>
                     <Typography>Name: {order?.name}</Typography>
                     <Typography>Description: {order?.description}</Typography>
-                    <Typography>Date ordered: {parseDate(order?.created_at)}</Typography>
+                    <Typography>Date ordered: {order?.created_at ? parseDate(order?.created_at) : ''}</Typography>
                     <Typography>Owner: {order?.owner?.name}</Typography>
                     <Typography>Status: {order?.status?.name}</Typography>
                 </Box>
