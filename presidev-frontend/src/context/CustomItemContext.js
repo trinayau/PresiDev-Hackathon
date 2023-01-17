@@ -8,13 +8,13 @@ export const CustomItemProvider = (props) => {
         switch (action.type) {
         case "ADD_TO_CUSTOMITEM":
             const tempstate = state.filter(
-            (item) => action.payload.product.name === item.product.name
+            (item) => action.payload.name === item.name
             );
     
             // if item is already in cart, increase quantity:
             if (tempstate.length > 0) {
             const tempstate = state.map((item) => {
-                if (item.product.name === action.payload.product.name) {
+                if (item.name === action.payload.name) {
                 return { ...item, quantity: item.quantity + parseInt(action.payload.quantity) };
                 } else {
                 return item;

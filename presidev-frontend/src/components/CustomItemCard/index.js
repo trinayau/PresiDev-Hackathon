@@ -28,9 +28,11 @@ const CustomItemCard = ({customItem, dispatch}) => {
         }
       };
     
-    return ( <div className="custom-item-card cart-info">
-    <p className="custom-item-card-name">Name: {customItem.name}</p>
-    <p className="custom-item-card-description">Desc: {customItem.description}</p>
+    return ( <div className="custom-item-card">
+      <div className="cart-info">
+    <p className="custom-item-card-name text-bold">{ customItem && customItem.name}</p>
+    <p className="custom-item-card-description">{customItem && customItem.description}</p>
+    
     <div className="cart-item-info">
           
           <div className="cart-item-details">
@@ -42,7 +44,7 @@ const CustomItemCard = ({customItem, dispatch}) => {
               +
             </span>
           </div>
-          <div className="cart-item-details">
+          <div className="cart-item-details-delete">
             <DeleteIcon sx={{
               ":hover": {
                 color: "#354F52",
@@ -50,6 +52,8 @@ const CustomItemCard = ({customItem, dispatch}) => {
               },
             }} onClick={() => dispatch({ type: "REMOVE", payload: { name: customItem.name } })}/>
           </div>
+          </div>
+
         </div>
     
     </div> );

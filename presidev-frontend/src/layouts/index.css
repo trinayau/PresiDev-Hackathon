@@ -2925,3 +2925,25 @@ min-height: none!important;
 flex-wrap: wrap;
 }
 
+/* custom items page */
+.custom-item-card{
+  display: flex;
+  align-items: center;
+  margin: 0px 0 20px 0;
+  background-color: #f9f9f9;
+}
+
+.custom-item-card-name{
+  font-weight: 600;
+  margin: 0 0 0 20px;
+}
+
+.custom-item-card-description{
+  margin: 0 0 0 20px;
+}
+
+.cart-items-details{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-column-gap: 30px;
+}

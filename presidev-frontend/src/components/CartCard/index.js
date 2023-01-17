@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch }) => {
+const CartCard = ({
+  cartItem,
+  itemQuantity,
+  setCartTotal,
+  cartTotal,
+  dispatch,
+}) => {
   const [quantity, setQuantity] = useState(itemQuantity);
   const [totalPrice, setTotalPrice] = useState(
     (cartItem.price / cartItem.quantity) * quantity
@@ -29,7 +35,6 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
     setTotalPrice(cartItem.price * newQuantity);
     setTotalOffset(cartItem.offset * newQuantity);
     setTotalCost(totalPrice + totalOffset);
-    
   };
 
   const minus = (e) => {
@@ -67,28 +72,39 @@ const CartCard = ({ cartItem, itemQuantity, setCartTotal, cartTotal, dispatch })
         />
       </div>
       <div class="cart-info">
-        <div class="cart-item-name">
-            {cartItem.name}</div>
-            <div className="cart-item-supplier">Desc: {cartItem.description}</div>
+        <div class="cart-item-name">{cartItem.name}</div>
+        <div className="cart-item-supplier">Desc: {cartItem.description}</div>
 
         <div className="cart-item-info">
-          
           <div className="cart-item-details">
-            <span className="quantity-changers" onClick={minus} style={{cursor: 'pointer'}}>
+            <span
+              className="quantity-changers"
+              onClick={minus}
+              style={{ cursor: "pointer" }}
+            >
               -
             </span>{" "}
             <span className="quantity-box">{quantity}</span>{" "}
-            <span className="quantity-changers" onClick={plus} style={{cursor: 'pointer'}}>
+            <span
+              className="quantity-changers"
+              onClick={plus}
+              style={{ cursor: "pointer" }}
+            >
               +
             </span>
           </div>
           <div className="cart-item-details">
-            <DeleteIcon sx={{
-              ":hover": {
-                color: "#354F52",
-                cursor: "pointer",
-              },
-            }} onClick={() => dispatch({ type: "REMOVE", payload: { id: cartItem.id } })}/>
+            <DeleteIcon
+              sx={{
+                ":hover": {
+                  color: "#354F52",
+                  cursor: "pointer",
+                },
+              }}
+              onClick={() =>
+                dispatch({ type: "REMOVE", payload: { id: cartItem.id } })
+              }
+            />
           </div>
         </div>
       </div>

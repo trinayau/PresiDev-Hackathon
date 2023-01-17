@@ -1,9 +1,20 @@
 from rest_framework import viewsets
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.models import Permission
 from datetime import datetime 
+from rest_framework.decorators import api_view
+from twilio.rest import Client 
+from django.http import HttpResponse
+from twilio.twiml.messaging_response import Body, Message, Redirect, MessagingResponse
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+# Twilio client
+client = Client(env('sid'), env('authToken'))
 
 from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem, Status
 from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer, StatusSerializer
@@ -115,7 +126,12 @@ class OrderViewSet(viewsets.ModelViewSet):
                     # create order item
                     order_item = OrderItems.objects.create(order=order, item=item, quantity=custom_item["quantity"])
                     order_item.save()
-        
+            # send message via twilio:
+            message = client.messages.create(
+                body="New order created for " + profile.organisation.name + "!" + " Order ID: " + str(order.id) + " Order Status: " + str(order.status) + " Order Created: " + str(order.created_at),
+                from_=env('twilioNumber'),
+                to=env('myNumber')
+            )
             return Response({"message": "Order created!", "order": order.id})
         else:
             return Response({"message": "Only end users can create orders!"})
@@ -233,3 +249,18 @@ class UserOrderItemsViewSet(viewsets.ModelViewSet):
                     items.append(item)
 
         return items
+
+@csrf_exempt
+def TwilioReply(request):
+    clientmessage = request.POST["Body"]
+    print(clientmessage)
+    if clientmessage == "help":        
+        client.messages.create(
+            from_=env('twilioNumber'),
+                        body="Hi, a team member from Presidium Network will be in touch with you shortly.",
+            to=env('myNumber')
+        )
+    
+    print(clientmessage)
+    return HttpResponse("Hi")
+    

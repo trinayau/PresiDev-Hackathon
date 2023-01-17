@@ -15,4 +15,5 @@ router.register('status', views.StatusViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('twilioreply/', views.TwilioReply, name='twilioreply'),
 ]
