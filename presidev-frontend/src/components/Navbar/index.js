@@ -319,7 +319,7 @@ const Navbar = () => {
                 disableScrollLock={true}
               >
                 <MenuItem key='profile' onClick={() => handleLink('/account')}>
-                  <Typography textAlign="center">Profile</Typography>
+                  <Typography textAlign="center">Account</Typography>
                 </MenuItem>
                 <MenuItem key='logout' onClick={() => { logoutuser(); handleCloseUserMenu() }} >
                   <Typography textAlign="center">Logout</Typography>

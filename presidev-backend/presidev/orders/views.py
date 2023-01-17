@@ -6,7 +6,7 @@ from django.contrib.auth.models import Permission
 from datetime import datetime 
 
 from .models import UserExtended, Order, Item, OrderItems, Category, Organisation, FavItem, Status
-from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSerializer, StatusSerializer
+from .serializers import UserExtendedSerializer, OrderSerializer, ItemSerializer, CategorySerializer, FavItemSerializer, OrderItemsSupplierSerializer, StatusSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -233,3 +233,11 @@ class UserOrderItemsViewSet(viewsets.ModelViewSet):
                     items.append(item)
 
         return items
+
+
+class OrderItemViewset(viewsets.ModelViewSet):
+    queryset = OrderItems.objects.all()
+    serializer_class = OrderItemsSupplierSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get"]
+    
