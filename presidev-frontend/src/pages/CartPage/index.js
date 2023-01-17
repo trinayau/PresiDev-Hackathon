@@ -23,8 +23,6 @@ const CartPage = () => {
   const customState = CustomItemState.info.state;
   const CustomItemDispatch = CustomItemState.info.dispatch;
 
-  console.log(customState, "customState");
-
   const { authTokens } = useContext(AuthContext);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ const CartPage = () => {
     , 0);
 
     const total = totalStateQuantity + totalCustomStateQuantity;
-
     setCartTotal(total);
   }, [customState, state]);
 
