@@ -3,5 +3,6 @@ const API_VERSION = 'v1'
 const API_ENDPOINT = API_URL + API_VERSION
 
 export {
-  API_ENDPOINT
+  API_ENDPOINT,
+  API_URL
 }

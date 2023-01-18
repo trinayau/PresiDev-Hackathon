@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useSnackbar } from 'notistack';
 
+import { API_URL } from "../settings";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    let response = await fetch("http://localhost:8000/api/token/", {
+    let response = await fetch(`${API_URL}/token/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
