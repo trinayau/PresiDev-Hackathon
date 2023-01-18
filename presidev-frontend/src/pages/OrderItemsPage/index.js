@@ -41,7 +41,8 @@ const OrderItems = () => {
     const columns = [
         { field: 'name', headerName: 'Name', width: 200 },
         { field: 'description', headerName: 'Description', width: 200 },
-        { field: 'quantity', headerName: 'Quantity', width: 200 },
+        { field: 'quantity', headerName: 'Order Quantity', width: 200 },//, valueGetter: (params) => params?.row?.name === 'Towels' ? 9 : params?.row?.quantity },
+        // user.profile.organisation.organisation_type.name !== "End User" && { headerName: 'Quantity in Stock', width: 200, valueGetter: (params) => params?.row?.name === 'Towels' ? 3 : params?.row?.quantity },
         { field: 'url', headerName: 'Url', width: 200 },
         { field: 'category', headerName: 'Category', width: 200, valueGetter: (params) => params?.row?.categories?.name }
     ]

@@ -16,5 +16,5 @@ router.register('orderitems', views.OrderItemViewset)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('twilioreply/', views.TwilioReply, name='twilioreply'),
+    # path('twilioreply/', views.TwilioReply, name='twilioreply'),
 ]
