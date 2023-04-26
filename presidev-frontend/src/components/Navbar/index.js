@@ -51,6 +51,7 @@ const Navbar = () => {
   return (<>
 
     <header>
+   
       <AppBar position="static" style={{ background: '#057465', boxShadow: 'none', padding: 0, maxWidth: '100% !important' }} className="d-flex align-items-center">
         <Container maxWidth="false">
           <Toolbar disableGutters sx={{ justifyContent: "space-between", padding: 0 }}>
@@ -79,7 +80,7 @@ const Navbar = () => {
                 },
               }}
             >
-              Presidium<span>Platform</span>
+              Presidium<span>Network</span>
             </Typography>
 
             {/* Mobile */}
